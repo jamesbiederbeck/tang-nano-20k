@@ -110,6 +110,7 @@ print(out.decode(errors='replace'))"
 | LEDs 0 to 5 | 15 to 20 | Active low. Count pattern ran. |
 | UART `tx` | 69 | Greeting read on the serial port. |
 | UART `rx` | 70 | `projects/cmtz/cmtz-mul` answered all 294 test pairs, with `PULL_MODE=UP`. |
+| HDMI TMDS | 33 to 40 | `projects/hdmi-test` shows a stable 720p picture. Clock on 33/34, data on 35/36, 37/38, 39/40. Use `IO_TYPE=LVDS25` without `BANK_VCCIO`. |
 
 Pin map for the rest of the board is on the Sipeed wiki. A pin diagram image from the Amazon listing was used for the LED pins.
 
