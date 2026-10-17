@@ -5,7 +5,7 @@ Open-source flow via [APIO](https://github.com/FPGAwars/apio): yosys, nextpnr-hi
 
 ## Why this repo exists
 
-The board was bought after reading Hackaday's "The FPGA Chronicles" series by Al Williams. We bought it from Amazon (WayPonDEV listing, ASIN B0C5XJV83K). Saved copies of the articles, comments included, are in `docs/hackaday-fpga-chronicles/`.
+The board was bought after reading Hackaday's "The FPGA Chronicles" series by Al Williams. We bought it from Amazon (WayPonDEV listing, ASIN B0C5XJV83K). The articles and comments are not copied into this repo. Links, and the places where they shaped our work, are in [`docs/hackaday-fpga-chronicles.md`](docs/hackaday-fpga-chronicles.md).
 
 | # | Article | Published | Topic | What we used | What we did not use |
 |---|---|---|---|---|---|
@@ -36,7 +36,7 @@ The high-level steps are in `developing.md`, under "Starting a new project".
 | Path | What |
 |---|---|
 | `projects/<name>/` | One APIO project each: `apio.ini`, Verilog, `pins.cst` |
-| `docs/` | Reading material saved for offline use |
+| `docs/` | Notes on the Hackaday series and where it informed this repo |
 | `reference/` | Dumps and notes from the board itself |
 | `udev/` | udev rule that gives the `plugdev` group access to the on-board debugger |
 | `developing.md` | What is installed, where, what was changed on this machine, workflow, pitfalls |

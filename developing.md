@@ -92,8 +92,8 @@ Reading the serial port without installing anything:
 
 ```
 python3 -I -c "
-import os, termios, time, select
-fd = os.open('/dev/serial/by-id/usb-SIPEED_USB_Debugger_2025030317-if01-port0', os.O_RDWR|os.O_NOCTTY|os.O_NONBLOCK)
+import os, glob, termios, time, select
+fd = os.open(glob.glob('/dev/serial/by-id/usb-SIPEED_USB_Debugger_*-if01-port0')[0], os.O_RDWR|os.O_NOCTTY|os.O_NONBLOCK)
 a = termios.tcgetattr(fd); a[0]=a[1]=a[3]=0; a[2]=termios.CS8|termios.CREAD|termios.CLOCAL; a[4]=a[5]=termios.B115200
 termios.tcsetattr(fd, termios.TCSANOW, a)
 end=time.time()+4; out=b''

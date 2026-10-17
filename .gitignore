@@ -5,3 +5,4 @@ _build/
 *.vcd
 *.fst
 __pycache__/
+docs/hackaday-fpga-chronicles/
