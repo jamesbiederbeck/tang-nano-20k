@@ -3,6 +3,38 @@
 Random FPGA projects for the Sipeed Tang Nano 20K (Gowin GW2AR-18C, QN88).
 Open-source flow via [APIO](https://github.com/FPGAwars/apio): yosys, nextpnr-himbaechel, gowin_pack, openFPGALoader.
 
+## How it fits together
+
+The tool flow, from Verilog to the board:
+
+```mermaid
+flowchart LR
+    v["Verilog<br/>*.v"] --> y["yosys<br/>synth_gowin"]
+    y -->|"hardware.json"| n["nextpnr-himbaechel<br/>place and route"]
+    pins["pins.cst"] --> n
+    n -->|"hardware.pnr.json"| g["gowin_pack"]
+    g -->|"hardware.fs"| o["openFPGALoader"]
+    o -->|"load to SRAM<br/>gone on power cycle"| fpga["FPGA"]
+    o -->|"-f: write SPI flash<br/>persists"| fpga
+    v --> sim["apio test<br/>iverilog"]
+    tb["testbench<br/>*_tb.v"] --> sim
+```
+
+`apio build` runs yosys, nextpnr and gowin_pack in one step. `apio test` runs the testbenches in simulation, with no board.
+
+The board, as the PC sees it:
+
+```mermaid
+flowchart LR
+    pc["PC"] <-->|"USB-C"| bl["BL616 debugger<br/>shows up as an FT2232<br/>0403:6010"]
+    bl <-->|"channel A: JTAG"| fpga["GW2AR-18 FPGA"]
+    bl <-->|"channel B: UART<br/>tx pin 69, rx pin 70"| fpga
+    xtal["27 MHz crystal"] -->|"pin 4"| fpga
+    flash["64 Mbit SPI flash<br/>holds the bitstream"] <--> fpga
+    fpga -->|"pins 15 to 20"| led["6 LEDs<br/>active low"]
+    fpga -->|"pins 33 to 40"| hdmi["HDMI output"]
+```
+
 ## Why this repo exists
 
 The board was bought after reading Hackaday's "The FPGA Chronicles" series by Al Williams. We bought it from Amazon (WayPonDEV listing, ASIN B0C5XJV83K). The articles and comments are not copied into this repo. Links, and the places where they shaped our work, are in [`docs/hackaday-fpga-chronicles.md`](docs/hackaday-fpga-chronicles.md).
@@ -15,7 +47,7 @@ The board was bought after reading Hackaday's "The FPGA Chronicles" series by Al
 
 ## Lessons learned
 
-These come from setting the board up and running two designs, not from the articles.
+These come from setting the board up and running the designs here, not from the articles.
 
 - **The open-source flow is enough.** A 6-LED design builds in about 9 seconds with `apio build` and loads over JTAG. No vendor tools were needed.
 - **The "FT2232" is the board's BL616.** It shows up as `0403:6010`, so use `openFPGALoader -c ft2232` and install the udev rule. Channel A is JTAG and channel B is the UART.
@@ -24,7 +56,7 @@ These come from setting the board up and running two designs, not from the artic
 - **JTAG can drop out.** Detection once returned an empty chain until the board was unplugged and replugged. A USB reset did not help. The `empty` line openFPGALoader prints is not a result. Look for the `idcode` line.
 - **The UART belongs to whatever the FPGA is running.** With the LiteX design loaded, the serial port showed a LiteX prompt. The BL616 console that article 2 describes (`^X^C`) did not appear. When our design runs, the port is ours.
 - **We did not need the programmable clock.** The 27 MHz crystal on pin 4 clocks the design directly, so the BL616's clock commands were never touched.
-- **We have not simulated anything yet.** The one bug so far, an off-by-one in the UART message, was caught by rereading before loading. Testbenches are the next thing to add.
+- **Simulate first, and make the test able to fail.** `stoplight`, `hdmi-test` and the cmtz projects have testbenches, and each was checked against a deliberately broken copy. The one bug found before a testbench existed, an off-by-one in the UART message, was caught only by rereading.
 - **The toolchain is big.** `~/.apio` is about 3.2 GB. Put optional packages on another disk. See `developing.md`.
 
 ## Making something new
@@ -38,6 +70,8 @@ The high-level steps are in `developing.md`, under "Starting a new project".
 | [`blink`](projects/blink/) | Binary counter on the six LEDs. Proves the toolchain. |
 | [`hello`](projects/hello/) | UART greeting once a second through the on-board USB bridge, plus a slow LED count. |
 | [`stoplight`](projects/stoplight/) | Two-way intersection state machine on the LEDs, with a testbench. |
+| [`hdmi-test`](projects/hdmi-test/) | 1280x720 @ 60 Hz HDMI test pattern with its own TMDS encoder. |
+| [`cmtz/`](projects/cmtz/) | Cook-Mertz programs compiled to Verilog, each a UART pipeline. Generated from the cook_mertz repo. |
 
 ## Layout
 
@@ -71,7 +105,7 @@ openFPGALoader -c ft2232 -f _build/default/hardware.fs     # to flash, persists
 ## Board notes
 
 - The on-board BL616 debugger enumerates as an FT2232 (`0403:6010`, "SIPEED USB Debugger"). Channel A is JTAG, channel B is the UART (`/dev/ttyUSB1` on this machine).
-- Pins confirmed on this board: `clk` 4 (27 MHz crystal), LEDs 15 to 20 (active low), UART `tx` 69. `rx` is probably 70, not tested.
+- Pins confirmed on this board: `clk` 4 (27 MHz crystal), LEDs 15 to 20 (active low), UART `tx` 69 and `rx` 70, HDMI 33 to 40.
 - JTAG sometimes stops answering until the board is power-cycled. A USB reset does not fix it.
 - The board shipped with, or was left with, a LiteX SoC in flash. A dump is in `reference/tang-nano-20k-flash/`. To restore it:
   `openFPGALoader -c ft2232 -f reference/tang-nano-20k-flash/tang20k-flash-8M.bin`
