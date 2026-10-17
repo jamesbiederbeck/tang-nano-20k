@@ -31,6 +31,14 @@ These come from setting the board up and running two designs, not from the artic
 
 The high-level steps are in `developing.md`, under "Starting a new project".
 
+## Projects
+
+| Project | What |
+|---|---|
+| [`blink`](projects/blink/) | Binary counter on the six LEDs. Proves the toolchain. |
+| [`hello`](projects/hello/) | UART greeting once a second through the on-board USB bridge, plus a slow LED count. |
+| [`stoplight`](projects/stoplight/) | Two-way intersection state machine on the LEDs, with a testbench. |
+
 ## Layout
 
 | Path | What |

@@ -1,0 +1,550 @@
+<title>Tang Nano 20K Schematic</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+  /* Layout: tabs, one figure per tab. Signals read left to right, state and outputs flow down on the stoplight tab. */
+  :root {
+    --bg: #f1f4f3;
+    --ink: #1b2a2d;
+    --muted: #5b6d70;
+    --block: #ffffff;
+    --rule: #c9d4d2;
+    --accent: #0b7a75;
+    --accent-soft: #d9efec;
+    --lamp-red: #c2362b;
+    --lamp-amber: #b9770e;
+    --lamp-green: #2f8f4e;
+    --font-sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0f1a1c; --ink: #d7e4e2; --muted: #92a6a8; --block: #162a2d;
+      --rule: #284246; --accent: #4fd1c5; --accent-soft: #14393b;
+      --lamp-red: #ff6b5e; --lamp-amber: #f0b429; --lamp-green: #5fd38d; color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0f1a1c; --ink: #d7e4e2; --muted: #92a6a8; --block: #162a2d;
+    --rule: #284246; --accent: #4fd1c5; --accent-soft: #14393b;
+    --lamp-red: #ff6b5e; --lamp-amber: #f0b429; --lamp-green: #5fd38d; color-scheme: dark;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.55;
+    padding-block: 32px 48px;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+  }
+  main { max-width: 1180px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px; }
+  header { display: flex; flex-direction: column; gap: 6px; max-width: 68ch; }
+  h1 { font-size: 26px; font-weight: 600; letter-spacing: -0.01em; margin: 0; text-wrap: balance; }
+  header p, .intro { margin: 0; color: var(--muted); max-width: 68ch; }
+  .src { font-family: var(--font-mono); font-size: 12px; color: var(--muted); letter-spacing: 0.02em; }
+
+  /* tabs */
+  .tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--rule); overflow-x: auto; }
+  .tabs button {
+    appearance: none; background: none; border: 0; border-bottom: 3px solid transparent;
+    color: var(--muted); font: 500 14px var(--font-sans); padding: 10px 14px 9px; cursor: pointer; white-space: nowrap;
+  }
+  .tabs button[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--accent); }
+  .tabs button:hover { color: var(--ink); }
+  .tabs button:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+  .panel { display: flex; flex-direction: column; gap: 28px; }
+
+  figure { margin: 0; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+  .sheet {
+    overflow-x: auto;
+    background: var(--block);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 8px;
+  }
+  .sheet svg { display: block; min-width: 980px; width: 100%; height: auto; }
+  figcaption { color: var(--muted); font-size: 13.5px; max-width: 78ch; }
+
+  /* SVG marks */
+  svg .blk { fill: var(--block); stroke: var(--ink); stroke-width: 1.5; }
+  svg .blk.io { fill: var(--accent-soft); stroke: var(--accent); }
+  svg .w { fill: none; stroke: var(--ink); stroke-width: 1.5; }
+  svg .wa { fill: none; stroke: var(--accent); stroke-width: 2.2; }
+  svg .fb { fill: none; stroke: var(--muted); stroke-width: 1.2; stroke-dasharray: 4 3; }
+  svg .mk { fill: var(--ink); }
+  svg .mka { fill: var(--accent); }
+  svg .mkm { fill: var(--muted); }
+  svg .sym { fill: var(--block); stroke: var(--ink); stroke-width: 1.5; }
+  svg .dot { fill: var(--ink); }
+  svg text { font-family: var(--font-mono); font-size: 12px; fill: var(--ink); }
+  svg .nm { font-weight: 600; font-size: 13px; }
+  svg .sub { fill: var(--muted); font-size: 11px; }
+  svg .net { fill: var(--muted); font-size: 11px; }
+  svg .sect { font-family: var(--font-sans); font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; fill: var(--muted); }
+  svg .acc { fill: var(--accent); font-weight: 600; }
+  svg .rule { stroke: var(--rule); stroke-width: 1; }
+
+  .tables { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+  .tables > section { min-width: 0; display: flex; flex-direction: column; gap: 8px; }
+  h2 { font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 0; }
+  .tw { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; font-family: var(--font-mono); font-size: 12.5px; font-variant-numeric: tabular-nums; }
+  th, td { text-align: left; padding: 6px 12px 6px 0; border-bottom: 1px solid var(--rule); white-space: nowrap; }
+  th { color: var(--muted); font-weight: 500; font-family: var(--font-sans); font-size: 12px; }
+  td.ok { color: var(--accent); font-weight: 600; }
+  p.note { margin: 0; font-size: 13.5px; color: var(--muted); max-width: 60ch; }
+
+  /* lamp chips: colour plus the word, so state never depends on colour alone */
+  .lamp::before { content: ""; display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 6px; background: var(--rule); }
+  .lamp.r::before { background: var(--lamp-red); }
+  .lamp.y::before { background: var(--lamp-amber); }
+  .lamp.g::before { background: var(--lamp-green); }
+</style>
+
+<main>
+  <header>
+    <h1>Tang Nano 20K Schematic</h1>
+    <p>Logic loaded onto the board's GW2AR-18, drawn as signal flow. One tab per project in the <span class="src">tang-nano-20k</span> repo.</p>
+  </header>
+
+  <div class="tabs" role="tablist" aria-label="Projects">
+    <button role="tab" id="tab-hello" data-tab="hello" aria-controls="panel-hello" aria-selected="true">hello: LEDs and UART</button>
+    <button role="tab" id="tab-stoplight" data-tab="stoplight" aria-controls="panel-stoplight" aria-selected="false">stoplight</button>
+  </div>
+
+  <!-- ===================== hello ===================== -->
+  <section class="panel" id="panel-hello" role="tabpanel" aria-labelledby="tab-hello">
+    <p class="intro">The logic in <span class="src">projects/hello/hello.v</span>: a free-running counter that drives the six LEDs, and a UART transmitter that sends a greeting to the PC once a second.</p>
+
+    <figure>
+      <div class="sheet">
+        <svg viewBox="0 0 1200 560" role="img" aria-label="Schematic of hello.v. Path A: the 27 MHz clock feeds a 27-bit counter whose top six bits pass through inverters to the six active-low LEDs. Path B: a one-second timer starts a state machine that reads 27 message bytes from a ROM into a 10-bit shift register clocked out by a 234-count baud divider, through a TX flip-flop to pin 69 and the BL616 USB bridge, appearing on the PC as ttyUSB1.">
+          <defs>
+            <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path class="mk" d="M0,0 L10,5 L0,10 z"/></marker>
+            <marker id="aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path class="mka" d="M0,0 L10,5 L0,10 z"/></marker>
+            <marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="mkm" d="M0,0 L10,5 L0,10 z"/></marker>
+          </defs>
+
+          <!-- clock source -->
+          <rect class="blk io" x="20" y="290" width="104" height="70" rx="2"/>
+          <text class="nm" x="32" y="312">clk</text>
+          <text class="sub" x="32" y="329">pin 4</text>
+          <text class="sub" x="32" y="344">27 MHz crystal</text>
+          <text class="net" x="20" y="382">net "clk" is wired to</text>
+          <text class="net" x="20" y="396">every register below</text>
+
+          <!-- ============ A: counter to LEDs ============ -->
+          <text class="sect" x="200" y="34">A · Counter to LEDs</text>
+          <line class="rule" x1="200" y1="42" x2="1180" y2="42"/>
+
+          <rect class="blk" x="200" y="62" width="170" height="90" rx="2"/>
+          <text class="nm" x="214" y="90">count</text>
+          <text class="sub" x="214" y="108">27-bit register</text>
+          <text class="sub" x="214" y="124">+1 every clk</text>
+          <polygon class="sym" points="200,120 210,128 200,136"/>
+          <line class="w" x1="172" y1="128" x2="200" y2="128"/>
+          <text class="net" x="140" y="132">clk</text>
+
+          <!-- bus count[26:21] -->
+          <line class="w" x1="370" y1="95" x2="452" y2="95" marker-end="url(#ar)"/>
+          <line class="w" x1="404" y1="102" x2="412" y2="88"/>
+          <text class="net" x="400" y="78">6</text>
+          <text class="net" x="372" y="116">count[26:21]</text>
+
+          <!-- inverter x6 -->
+          <polygon class="sym" points="454,78 454,112 490,95"/>
+          <circle class="sym" cx="496" cy="95" r="5"/>
+          <text class="net" x="456" y="132">NOT ×6</text>
+          <text class="sub" x="456" y="146">active-low LEDs</text>
+
+          <line class="wa" x1="501" y1="95" x2="590" y2="95" marker-end="url(#aa)"/>
+          <line class="wa" x1="540" y1="102" x2="548" y2="88"/>
+          <text class="net" x="536" y="78">6</text>
+
+          <rect class="blk io" x="592" y="66" width="190" height="58" rx="2"/>
+          <text class="nm" x="606" y="90">leds[5:0]</text>
+          <text class="sub" x="606" y="108">pins 20…15 → on-board LEDs</text>
+
+          <text class="sub" x="810" y="86">LED0 = count[21], fastest</text>
+          <text class="sub" x="810" y="104">LED5 = count[26], slowest</text>
+
+          <!-- ============ B: UART ============ -->
+          <text class="sect" x="200" y="196">B · UART greeting, 115200 baud 8N1</text>
+          <line class="rule" x1="200" y1="204" x2="1180" y2="204"/>
+
+          <!-- wait_ctr -->
+          <rect class="blk" x="200" y="250" width="150" height="80" rx="2"/>
+          <text class="nm" x="214" y="278">wait_ctr</text>
+          <text class="sub" x="214" y="296">25-bit register</text>
+          <polygon class="sym" points="200,298 210,306 200,314"/>
+          <line class="w" x1="172" y1="306" x2="200" y2="306"/>
+          <text class="net" x="140" y="310">clk</text>
+
+          <line class="w" x1="350" y1="290" x2="392" y2="290" marker-end="url(#ar)"/>
+          <rect class="blk" x="394" y="262" width="130" height="56" rx="2"/>
+          <text class="nm" x="408" y="286">= 26 999 999</text>
+          <text class="sub" x="408" y="304">one second</text>
+          <path class="fb" d="M459,318 V352 H275 V330" marker-end="url(#am)"/>
+          <text class="net" x="330" y="348">clear</text>
+
+          <line class="wa" x1="524" y1="290" x2="570" y2="290" marker-end="url(#aa)"/>
+          <text class="net" x="535" y="280">go</text>
+
+          <!-- state FSM -->
+          <rect class="blk" x="572" y="250" width="170" height="120" rx="2"/>
+          <text class="nm" x="586" y="278">state</text>
+          <text class="sub" x="586" y="296">3-bit state machine</text>
+          <text class="sub" x="586" y="318">0 gap   1 load byte</text>
+          <text class="sub" x="586" y="334">2 send  3 next byte</text>
+          <polygon class="sym" points="696,250 704,258 712,250"/>
+          <line class="w" x1="704" y1="232" x2="704" y2="250"/>
+          <text class="net" x="690" y="226">clk</text>
+
+          <!-- bit_tick into FSM -->
+          <path class="w" d="M524,440 H548 V352 H570" marker-end="url(#ar)"/>
+          <text class="net" x="500" y="372">bit_tick</text>
+
+          <!-- FSM load -> shifter -->
+          <line class="w" x1="742" y1="290" x2="800" y2="290" marker-end="url(#ar)"/>
+          <text class="net" x="756" y="280">load</text>
+
+          <!-- shifter -->
+          <rect class="blk" x="802" y="250" width="176" height="80" rx="2"/>
+          <text class="nm" x="816" y="278">shifter</text>
+          <text class="sub" x="816" y="296">10-bit shift register</text>
+          <text class="sub" x="816" y="312">{stop 1, byte, start 0}</text>
+          <polygon class="sym" points="946,250 954,258 962,250"/>
+          <line class="w" x1="954" y1="232" x2="954" y2="250"/>
+          <text class="net" x="940" y="226">clk</text>
+          <line class="w" x1="826" y1="232" x2="826" y2="250" marker-end="url(#ar)"/>
+          <text class="net" x="800" y="226">bit_tick</text>
+
+          <!-- shifter -> tx reg -->
+          <line class="w" x1="978" y1="290" x2="1018" y2="290" marker-end="url(#ar)"/>
+          <text class="net" x="980" y="280">[0]</text>
+
+          <!-- tx reg -->
+          <rect class="blk" x="1020" y="268" width="62" height="44" rx="2"/>
+          <text class="nm" x="1034" y="294">tx</text>
+          <polygon class="sym" points="1043,312 1051,304 1059,312"/>
+          <line class="w" x1="1051" y1="312" x2="1051" y2="330"/>
+          <text class="net" x="1038" y="344">clk</text>
+
+          <line class="wa" x1="1082" y1="290" x2="1110" y2="290" marker-end="url(#aa)"/>
+          <rect class="blk io" x="1112" y="262" width="76" height="56" rx="2"/>
+          <text class="nm" x="1124" y="286">tx</text>
+          <text class="sub" x="1124" y="304">pin 69</text>
+
+          <!-- off-chip -->
+          <line class="wa" x1="1150" y1="318" x2="1150" y2="372" marker-end="url(#aa)"/>
+          <rect class="blk" x="1062" y="374" width="126" height="48" rx="2" style="stroke-dasharray:5 3"/>
+          <text class="nm" x="1074" y="396">BL616</text>
+          <text class="sub" x="1074" y="412">USB-UART bridge</text>
+          <line class="wa" x1="1150" y1="422" x2="1150" y2="462" marker-end="url(#aa)"/>
+          <rect class="blk io" x="1062" y="464" width="126" height="48" rx="2"/>
+          <text class="nm" x="1074" y="486">/dev/ttyUSB1</text>
+          <text class="sub" x="1074" y="502">on the PC</text>
+
+          <!-- FSM <-> idx -->
+          <line class="w" x1="624" y1="370" x2="624" y2="408" marker-end="url(#ar)"/>
+          <text class="net" x="596" y="394">inc</text>
+          <line class="w" x1="690" y1="408" x2="690" y2="372" marker-end="url(#ar)"/>
+          <text class="net" x="698" y="394">idx = 26</text>
+
+          <!-- idx -->
+          <rect class="blk" x="572" y="410" width="170" height="70" rx="2"/>
+          <text class="nm" x="586" y="438">idx</text>
+          <text class="sub" x="586" y="456">6-bit register, 0 → 26</text>
+          <polygon class="sym" points="700,480 708,472 716,480"/>
+          <line class="w" x1="708" y1="480" x2="708" y2="500"/>
+          <text class="net" x="694" y="514">clk</text>
+
+          <!-- idx -> ROM -->
+          <line class="w" x1="742" y1="445" x2="800" y2="445" marker-end="url(#ar)"/>
+          <line class="w" x1="765" y1="452" x2="773" y2="438"/>
+          <text class="net" x="762" y="430">6</text>
+          <text class="net" x="744" y="466">address</text>
+
+          <!-- ROM -->
+          <rect class="blk" x="802" y="410" width="176" height="70" rx="2"/>
+          <text class="nm" x="816" y="438">message ROM</text>
+          <text class="sub" x="816" y="456">27 bytes, no clock</text>
+          <text class="acc" x="802" y="504" style="font-size:12px">"Hello from Tang Nano 20K!\r\n"</text>
+
+          <!-- ROM -> shifter -->
+          <line class="w" x1="890" y1="410" x2="890" y2="332" marker-end="url(#ar)"/>
+          <line class="w" x1="884" y1="376" x2="896" y2="368"/>
+          <text class="net" x="902" y="378">8 byte</text>
+
+          <!-- baud divider -->
+          <rect class="blk" x="200" y="400" width="150" height="80" rx="2"/>
+          <text class="nm" x="214" y="428">div</text>
+          <text class="sub" x="214" y="446">16-bit register</text>
+          <polygon class="sym" points="200,448 210,456 200,464"/>
+          <line class="w" x1="172" y1="456" x2="200" y2="456"/>
+          <text class="net" x="140" y="460">clk</text>
+
+          <line class="w" x1="350" y1="440" x2="392" y2="440" marker-end="url(#ar)"/>
+          <rect class="blk" x="394" y="412" width="130" height="56" rx="2"/>
+          <text class="nm" x="408" y="436">= 233</text>
+          <text class="sub" x="408" y="454">27 MHz ÷ 234</text>
+          <path class="fb" d="M459,468 V500 H275 V480" marker-end="url(#am)"/>
+          <text class="net" x="330" y="496">clear</text>
+          <circle class="dot" cx="548" cy="440" r="3"/>
+        </svg>
+      </div>
+      <figcaption>Two independent paths share one 27 MHz clock. Path A is a free-running counter; its top six bits, inverted, light the LEDs. Path B waits one second, then loads each of the 27 message bytes into a shift register and clocks it out at 115200 baud, one bit every 234 clocks. Teal marks the signals that leave the FPGA; the dashed box is the on-board USB bridge, outside the FPGA. Not drawn: wait_ctr only counts while the state machine is in state 0, div only counts while it is sending (state 2), and a 4-bit bit_i counter tracks the 10 bits of each byte, so "byte done" is bit_i = 9 at a bit tick.</figcaption>
+    </figure>
+
+    <div class="tables">
+      <section>
+        <h2>LED timing</h2>
+        <div class="tw">
+          <table>
+            <thead><tr><th>LED</th><th>pin</th><th>count bit</th><th>toggles every</th></tr></thead>
+            <tbody>
+              <tr><td>LED0</td><td>15</td><td>21</td><td>78 ms</td></tr>
+              <tr><td>LED1</td><td>16</td><td>22</td><td>155 ms</td></tr>
+              <tr><td>LED2</td><td>17</td><td>23</td><td>311 ms</td></tr>
+              <tr><td>LED3</td><td>18</td><td>24</td><td>622 ms</td></tr>
+              <tr><td>LED4</td><td>19</td><td>25</td><td>1.2 s</td></tr>
+              <tr><td>LED5</td><td>20</td><td>26</td><td>2.5 s</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section>
+        <h2>Pins checked on the board</h2>
+        <div class="tw">
+          <table>
+            <thead><tr><th>signal</th><th>pin</th><th>how we know</th></tr></thead>
+            <tbody>
+              <tr><td>clk</td><td>4</td><td class="ok">LEDs counted</td></tr>
+              <tr><td>leds[5:0]</td><td>15–20</td><td class="ok">LEDs counted</td></tr>
+              <tr><td>tx</td><td>69</td><td class="ok">greeting read on ttyUSB1</td></tr>
+              <tr><td>rx</td><td>70</td><td>not used yet</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note">The design is loaded into SRAM only. Unplugging the board brings back the LiteX design stored in flash.</p>
+      </section>
+    </div>
+  </section>
+
+  <!-- ===================== stoplight ===================== -->
+  <section class="panel" id="panel-stoplight" role="tabpanel" aria-labelledby="tab-stoplight">
+    <p class="intro">The logic in <span class="src">projects/stoplight/stoplight.v</span>: a two-way intersection on the six on-board LEDs. A second timer feeds a phase counter, which steps a six-state register that decides which lamps are lit.</p>
+
+    <figure>
+      <div class="sheet">
+        <svg viewBox="0 0 1200 600" role="img" aria-label="Schematic of stoplight.v. The 27 MHz clock drives a 32-bit tick counter that clears at 26,999,999 to produce a one-second pulse. A seconds counter counts those pulses and is compared with the duration of the current state minus one. When both conditions hold an AND gate raises phase_done, which advances the 3-bit state register through next(state) and clears the seconds counter. A lamp decoder turns the state into six lamps, which are inverted for the active-low LEDs on pins 15 to 20.">
+          <defs>
+            <marker id="s-ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path class="mk" d="M0,0 L10,5 L0,10 z"/></marker>
+            <marker id="s-aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path class="mka" d="M0,0 L10,5 L0,10 z"/></marker>
+            <marker id="s-am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="mkm" d="M0,0 L10,5 L0,10 z"/></marker>
+          </defs>
+
+          <!-- clock source -->
+          <rect class="blk io" x="20" y="84" width="104" height="70" rx="2"/>
+          <text class="nm" x="32" y="106">clk</text>
+          <text class="sub" x="32" y="123">pin 4</text>
+          <text class="sub" x="32" y="138">27 MHz crystal</text>
+          <text class="net" x="20" y="176">net "clk" is wired to</text>
+          <text class="net" x="20" y="190">every register</text>
+
+          <!-- ============ A: one-second timer ============ -->
+          <text class="sect" x="200" y="34">A · One-second timer</text>
+          <line class="rule" x1="200" y1="42" x2="1180" y2="42"/>
+
+          <rect class="blk" x="200" y="70" width="150" height="80" rx="2"/>
+          <text class="nm" x="214" y="98">ticks</text>
+          <text class="sub" x="214" y="116">32-bit register</text>
+          <text class="sub" x="214" y="132">+1 every clk</text>
+          <polygon class="sym" points="200,122 210,130 200,138"/>
+          <line class="w" x1="172" y1="130" x2="200" y2="130"/>
+          <text class="net" x="140" y="134">clk</text>
+
+          <line class="w" x1="350" y1="110" x2="392" y2="110" marker-end="url(#s-ar)"/>
+          <rect class="blk" x="394" y="82" width="130" height="56" rx="2"/>
+          <text class="nm" x="408" y="106">= 26 999 999</text>
+          <text class="sub" x="408" y="124">end of a second</text>
+          <path class="fb" d="M459,138 V172 H275 V150" marker-end="url(#s-am)"/>
+          <text class="net" x="330" y="168">clear</text>
+
+          <!-- sec_tick to the AND gate -->
+          <path class="w" d="M524,110 H600 V298 H620" marker-end="url(#s-ar)"/>
+          <text class="net" x="534" y="100">sec_tick</text>
+
+          <!-- ============ B: phase counter and state ============ -->
+          <text class="sect" x="200" y="212">B · Phase counter and state</text>
+          <line class="rule" x1="200" y1="220" x2="1180" y2="220"/>
+
+          <!-- secs -->
+          <line class="w" x1="240" y1="262" x2="240" y2="290" marker-end="url(#s-ar)"/>
+          <text class="net" x="196" y="256">sec_tick</text>
+          <line class="w" x1="310" y1="262" x2="310" y2="290" marker-end="url(#s-ar)"/>
+          <text class="net" x="268" y="256">phase_done</text>
+
+          <rect class="blk" x="200" y="290" width="150" height="80" rx="2"/>
+          <text class="nm" x="214" y="318">secs</text>
+          <text class="sub" x="214" y="336">8-bit register</text>
+          <text class="sub" x="214" y="352">seconds in this phase</text>
+          <polygon class="sym" points="200,346 210,354 200,362"/>
+          <line class="w" x1="172" y1="354" x2="200" y2="354"/>
+          <text class="net" x="140" y="358">clk</text>
+
+          <line class="w" x1="350" y1="330" x2="392" y2="330" marker-end="url(#s-ar)"/>
+          <rect class="blk" x="394" y="302" width="130" height="56" rx="2"/>
+          <text class="nm" x="408" y="326">= duration − 1</text>
+          <text class="sub" x="408" y="344">last second of phase</text>
+
+          <!-- duration lookup -->
+          <line class="w" x1="459" y1="410" x2="459" y2="360" marker-end="url(#s-ar)"/>
+          <text class="net" x="466" y="392">duration</text>
+          <rect class="blk" x="394" y="410" width="130" height="76" rx="2"/>
+          <text class="nm" x="408" y="432">duration(state)</text>
+          <text class="sub" x="408" y="450">green 5 s</text>
+          <text class="sub" x="408" y="464">yellow 2 s</text>
+          <text class="sub" x="408" y="478">all red 1 s</text>
+          <line class="w" x1="360" y1="448" x2="392" y2="448" marker-end="url(#s-ar)"/>
+          <text class="net" x="322" y="452">state</text>
+
+          <!-- AND gate: phase_done -->
+          <path class="sym" d="M620,286 H645 A24,24 0 0 1 645,334 H620 Z"/>
+          <path class="w" d="M524,330 H590 V322 H620" marker-end="url(#s-ar)"/>
+          <text class="sub" x="628" y="314">AND</text>
+          <line class="w" x1="669" y1="310" x2="758" y2="310" marker-end="url(#s-ar)"/>
+          <text class="net" x="676" y="300">phase_done</text>
+
+          <!-- state register -->
+          <rect class="blk" x="760" y="280" width="170" height="110" rx="2"/>
+          <text class="nm" x="774" y="308">state</text>
+          <text class="sub" x="774" y="326">3-bit register</text>
+          <text class="sub" x="774" y="342">powers up in state 5</text>
+          <text class="sub" x="774" y="358">(all red)</text>
+          <polygon class="sym" points="836,280 844,288 852,280"/>
+          <line class="w" x1="844" y1="262" x2="844" y2="280"/>
+          <text class="net" x="830" y="256">clk</text>
+
+          <!-- next(state) feedback -->
+          <path class="w" d="M962,335 V470 H932" marker-end="url(#s-ar)"/>
+          <rect class="blk" x="760" y="440" width="170" height="60" rx="2"/>
+          <text class="nm" x="774" y="466">next(state)</text>
+          <text class="sub" x="774" y="484">+1, and 5 wraps to 0</text>
+          <path class="w" d="M760,470 H728 V370 H758" marker-end="url(#s-ar)"/>
+          <text class="net" x="736" y="424">next</text>
+
+          <!-- state out -->
+          <line class="w" x1="930" y1="335" x2="1000" y2="335" marker-end="url(#s-ar)"/>
+          <circle class="dot" cx="962" cy="335" r="3"/>
+
+          <!-- lamp decoder -->
+          <rect class="blk" x="1002" y="290" width="168" height="110" rx="2"/>
+          <text class="nm" x="1016" y="318">lamp decoder</text>
+          <text class="sub" x="1016" y="336">state → six lamps</text>
+          <text class="sub" x="1016" y="352">{EW g y r, NS g y r}</text>
+          <text class="sub" x="1016" y="368">1 = lit</text>
+
+          <line class="w" x1="1086" y1="400" x2="1086" y2="430" marker-end="url(#s-ar)"/>
+          <line class="w" x1="1080" y1="418" x2="1092" y2="410"/>
+          <text class="net" x="1098" y="420">6</text>
+
+          <!-- inverters x6 -->
+          <polygon class="sym" points="1068,432 1104,432 1086,462"/>
+          <circle class="sym" cx="1086" cy="468" r="5"/>
+          <text class="net" x="1112" y="452">NOT ×6</text>
+          <text class="sub" x="1112" y="466">active-low LEDs</text>
+
+          <line class="wa" x1="1086" y1="473" x2="1086" y2="504" marker-end="url(#s-aa)"/>
+          <rect class="blk io" x="940" y="506" width="230" height="90" rx="2"/>
+          <text class="nm" x="954" y="530">leds[5:0]</text>
+          <text class="sub" x="954" y="548">pins 15…20, active low</text>
+          <text class="sub" x="954" y="564">NS red, yellow, green: LED0–2</text>
+          <text class="sub" x="954" y="580">EW red, yellow, green: LED3–5</text>
+        </svg>
+      </div>
+      <figcaption>The clock is counted down to one second by <code>ticks</code>, and <code>secs</code> counts those seconds. When <code>secs</code> equals the current phase's length minus one at the end of a second, <code>phase_done</code> advances <code>state</code> and restarts <code>secs</code>. Each register has its own always block, following a comment on the Hackaday series about keeping unrelated logic out of one <code>if</code> chain. The decoder turns <code>state</code> into six lamps, inverted for the active-low LEDs, which leave the FPGA (teal). Both directions are red between phases, so green never overlaps.</figcaption>
+    </figure>
+
+    <div class="tables">
+      <section>
+        <h2>States</h2>
+        <div class="tw">
+          <table>
+            <thead><tr><th>state</th><th>north–south</th><th>east–west</th><th>seconds</th></tr></thead>
+            <tbody>
+              <tr><td>0 NS green</td><td><span class="lamp g">green</span></td><td><span class="lamp r">red</span></td><td>5</td></tr>
+              <tr><td>1 NS yellow</td><td><span class="lamp y">yellow</span></td><td><span class="lamp r">red</span></td><td>2</td></tr>
+              <tr><td>2 all red</td><td><span class="lamp r">red</span></td><td><span class="lamp r">red</span></td><td>1</td></tr>
+              <tr><td>3 EW green</td><td><span class="lamp r">red</span></td><td><span class="lamp g">green</span></td><td>5</td></tr>
+              <tr><td>4 EW yellow</td><td><span class="lamp r">red</span></td><td><span class="lamp y">yellow</span></td><td>2</td></tr>
+              <tr><td>5 all red</td><td><span class="lamp r">red</span></td><td><span class="lamp r">red</span></td><td>1</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note">One full cycle is 16 seconds. State 5 is also the power-up state, so the board starts all red.</p>
+      </section>
+      <section>
+        <h2>Lamps and pins</h2>
+        <div class="tw">
+          <table>
+            <thead><tr><th>lamp</th><th>LED</th><th>pin</th></tr></thead>
+            <tbody>
+              <tr><td>NS red</td><td>LED0</td><td>15</td></tr>
+              <tr><td>NS yellow</td><td>LED1</td><td>16</td></tr>
+              <tr><td>NS green</td><td>LED2</td><td>17</td></tr>
+              <tr><td>EW red</td><td>LED3</td><td>18</td></tr>
+              <tr><td>EW yellow</td><td>LED4</td><td>19</td></tr>
+              <tr><td>EW green</td><td>LED5</td><td>20</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section>
+        <h2>Checks</h2>
+        <div class="tw">
+          <table>
+            <thead><tr><th>check</th><th>result</th></tr></thead>
+            <tbody>
+              <tr><td>testbench, 23 pattern changes</td><td class="ok">pass</td></tr>
+              <tr><td>never green or yellow both ways</td><td class="ok">pass</td></tr>
+              <tr><td>variant with 3 s yellow</td><td class="ok">fails, as it should</td></tr>
+              <tr><td>on the board</td><td class="ok">lamps step as described</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note">Loaded into SRAM only; unplugging the board brings back the flash contents.</p>
+      </section>
+    </div>
+  </section>
+</main>
+
+<script>
+  (function () {
+    var tabs = Array.prototype.slice.call(document.querySelectorAll('[role="tab"]'));
+    function show(id) {
+      tabs.forEach(function (t) {
+        var on = t.getAttribute('data-tab') === id;
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+        document.getElementById('panel-' + t.getAttribute('data-tab')).hidden = !on;
+      });
+    }
+    tabs.forEach(function (t, i) {
+      t.addEventListener('click', function () {
+        var id = t.getAttribute('data-tab');
+        show(id);
+        try { history.replaceState(null, '', '#' + id); } catch (e) {}
+      });
+      t.addEventListener('keydown', function (e) {
+        if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+        var next = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length];
+        next.focus(); next.click();
+      });
+    });
+    var h = (location.hash || '').replace('#', '');
+    show(h === 'stoplight' ? 'stoplight' : 'hello');
+  })();
+</script>
