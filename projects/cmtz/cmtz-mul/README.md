@@ -34,7 +34,7 @@ Example: `03 05` replies `0F` (15), `10 10` replies `01` (16 * 16 = 256 = 15 * 1
 ## Test
 
 ```
-source ../../env.sh
+source ../../../env.sh
 apio test        # prints PASS for both testbenches
 ```
 
