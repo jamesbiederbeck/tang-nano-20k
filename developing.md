@@ -41,6 +41,26 @@ The on-board BL616 debugger shows up as an FT2232 (`0403:6010`, product "USB Deb
 - Channel A (interface 0) is JTAG. openFPGALoader takes this one over through libusb.
 - Channel B (interface 1) is the UART wired to the FPGA. On this machine it is `/dev/ttyUSB1` (`/dev/serial/by-id/usb-SIPEED_USB_Debugger_*-if01-port0`). The number depends on what else is plugged in, so use the `by-id` path in scripts.
 
+## Starting a new project
+
+High-level steps. Each one points at what we have actually done, and says so where we have not.
+
+1. **Figure out the circuit.** Write down what goes in, what comes out, which clock it needs and what it does with it. Decide which board pins it uses (the on-board LEDs, buttons, UART, header pins) and check the pin map on the Sipeed wiki before choosing. Note anything active low: the on-board LEDs are.
+2. **Make the project folder.**
+   ```
+   mkdir projects/<name> && cd projects/<name>
+   cp ../hello/apio.ini . && $EDITOR apio.ini     # change top-module
+   ```
+3. **Write the Verilog.** One top module whose port names match the constraints file. Keep the clock a plain `input wire clk`.
+4. **Write the pin constraints** in `pins.cst`, one `IO_LOC` and one `IO_PORT` line per port. Copy `projects/hello/pins.cst` and edit it. Use `IO_TYPE=LVCMOS33` for the 3.3 V pins.
+5. **Simulate it.** Write a testbench named `<something>_tb.v` that prints `PASS` or `FAIL` and calls `$finish`, then run `apio test`. `projects/stoplight/` is the worked example. Make sure the testbench can fail: break the design on purpose once and confirm it complains. This is the cheapest place to catch a bug.
+6. **Build.** `source env.sh && apio build`. Errors from yosys or nextpnr point at the Verilog or at a pin that does not exist.
+7. **Load into SRAM.** `openFPGALoader -c ft2232 _build/default/hardware.fs`. It runs until the next power cycle, which brings back whatever is in flash.
+8. **Check it on the board.** Watch the LEDs, or read the serial port as shown below. If JTAG stops answering, unplug and replug the board.
+9. **Iterate** on steps 3 to 8. Loading to SRAM is cheap and safe.
+10. **Flash it once you trust it.** `openFPGALoader -c ft2232 -f _build/default/hardware.fs` makes it boot at power-up. Check that `reference/tang-nano-20k-flash/` still holds the original backup first. We have not written to flash yet, so treat this step as untested.
+11. **Commit it.** The `.gitignore` already skips `_build/` and `*.fs`. Update the pin table below if you confirm a new pin.
+
 ## Daily workflow
 
 ```
@@ -104,7 +124,7 @@ Pin map for the rest of the board is on the Sipeed wiki. A pin diagram image fro
 ## What has not been tried
 
 - `apio upload`. All programming so far used `openFPGALoader` directly.
-- `apio sim`, `apio test`, `apio lint`, `apio format`, `apio report`.
+- `apio sim` (graphical waveforms), `apio lint`, `apio format`. `apio test` and `apio report` were used on `projects/stoplight/`.
 - Writing anything to flash. The board's original flash contents are backed up in `reference/tang-nano-20k-flash/`, and only SRAM has been written.
 - Restoring that backup.
 - `rx` on pin 70.
