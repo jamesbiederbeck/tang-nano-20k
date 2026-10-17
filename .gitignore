@@ -1,0 +1,7 @@
+# toolchain and build output
+.venv/
+_build/
+*.fs
+*.vcd
+*.fst
+__pycache__/

@@ -1,0 +1,4 @@
+# FTDI FT2232 JTAG/UART bridge
+SUBSYSTEM=="usb", ATTR{idVendor}=="0403", ATTR{idProduct}=="6010", MODE="0660", GROUP="plugdev"
+# Sipeed Tang Nano 20K onboard BL616 debugger
+SUBSYSTEM=="usb", ATTR{idVendor}=="352f", MODE="0660", GROUP="plugdev"
