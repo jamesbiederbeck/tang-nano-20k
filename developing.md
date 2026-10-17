@@ -109,7 +109,7 @@ print(out.decode(errors='replace'))"
 | `clk` | 4 | 27 MHz crystal. Clock-driven LED count ran. |
 | LEDs 0 to 5 | 15 to 20 | Active low. Count pattern ran. |
 | UART `tx` | 69 | Greeting read on the serial port. |
-| UART `rx` | 70 | From memory of Sipeed examples. Not tested. |
+| UART `rx` | 70 | `projects/cmtz-mul` answered all 294 test pairs, with `PULL_MODE=UP`. |
 
 Pin map for the rest of the board is on the Sipeed wiki. A pin diagram image from the Amazon listing was used for the LED pins.
 
