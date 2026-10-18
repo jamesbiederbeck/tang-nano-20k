@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 862 276" width="862" height="276" role="img" aria-label="cmtz-hello-field: UART receive pin 70 feeds 2 input ports (embed_0, embed_1); the datapath has 0 registered nodes over 1 stage; outputs phi4, phi8 go to UART transmit pin 69.">
+<title>cmtz-hello-field</title>
+<rect x="0" y="0" width="862" height="276" fill="#ffffff"/>
+<text x="20.0" y="28.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="16" font-weight="bold" fill="#1b2a2d" text-anchor="start">cmtz-hello-field</text>
+<text x="20.0" y="48.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="normal" fill="#5b6d70" text-anchor="start">F_17 datapath from 01_hello_field.cmtz</text>
+<rect x="185.0" y="90.0" width="255.4" height="116.0" rx="6" fill="none" stroke="#5b6d70" stroke-width="1.2" stroke-dasharray="5 4"/>
+<text x="251.5" y="84.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="11" font-weight="normal" fill="#5b6d70" text-anchor="middle">ports</text>
+<polyline points="294.0,125.0 310.0,125.0 310.0,125.0 322.0,125.0" fill="none" stroke="#0b7a75" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="322.0,125.0 314.0,128.6 314.0,121.4" fill="#0b7a75"/>
+<polyline points="294.0,171.0 310.0,171.0 310.0,171.0 322.0,171.0" fill="none" stroke="#0b7a75" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="322.0,171.0 314.0,174.6 314.0,167.4" fill="#0b7a75"/>
+<rect x="209.0" y="106.0" width="85.0" height="38.0" rx="3" fill="#d9efec" stroke="#0b7a75" stroke-width="1.6"/>
+<text x="218.0" y="122.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="bold" fill="#0b7a75" text-anchor="start">embed_0</text>
+<text x="218.0" y="137.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="11" font-weight="normal" fill="#5b6d70" text-anchor="start">req byte 0</text>
+<rect x="209.0" y="152.0" width="85.0" height="38.0" rx="3" fill="#d9efec" stroke="#0b7a75" stroke-width="1.6"/>
+<text x="218.0" y="168.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="bold" fill="#0b7a75" text-anchor="start">embed_1</text>
+<text x="218.0" y="183.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="11" font-weight="normal" fill="#5b6d70" text-anchor="start">req byte 1</text>
+<rect x="322.0" y="106.0" width="98.4" height="38.0" rx="3" fill="#d9efec" stroke="#0b7a75" stroke-width="1.6"/>
+<text x="331.0" y="122.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="bold" fill="#0b7a75" text-anchor="start">phi4</text>
+<text x="331.0" y="137.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="11" font-weight="normal" fill="#5b6d70" text-anchor="start">reply byte 0</text>
+<rect x="322.0" y="152.0" width="98.4" height="38.0" rx="3" fill="#d9efec" stroke="#0b7a75" stroke-width="1.6"/>
+<text x="331.0" y="168.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="bold" fill="#0b7a75" text-anchor="start">phi8</text>
+<text x="331.0" y="183.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="11" font-weight="normal" fill="#5b6d70" text-anchor="start">reply byte 1</text>
+<rect x="20.0" y="110.0" width="101.0" height="76.0" rx="3" fill="#d9efec" stroke="#0b7a75" stroke-width="1.6"/>
+<text x="34.0" y="133.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="14" font-weight="bold" fill="#0b7a75" text-anchor="start">UART rx</text>
+<text x="34.0" y="152.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="normal" fill="#5b6d70" text-anchor="start">pin 70</text>
+<text x="34.0" y="171.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="normal" fill="#5b6d70" text-anchor="start">115200 8N1</text>
+<rect x="504.4" y="110.0" width="101.0" height="76.0" rx="3" fill="#d9efec" stroke="#0b7a75" stroke-width="1.6"/>
+<text x="518.4" y="133.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="14" font-weight="bold" fill="#0b7a75" text-anchor="start">UART tx</text>
+<text x="518.4" y="152.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="normal" fill="#5b6d70" text-anchor="start">pin 69</text>
+<text x="518.4" y="171.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="normal" fill="#5b6d70" text-anchor="start">115200 8N1</text>
+<polyline points="121.0,148.0 185.0,148.0" fill="none" stroke="#0b7a75" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="185.0,148.0 177.0,151.6 177.0,144.4" fill="#0b7a75"/>
+<rect x="125.9" y="129.0" width="54.2" height="16" fill="#ffffff" stroke="none"/>
+<text x="153.0" y="140.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="11" font-weight="normal" fill="#0b7a75" text-anchor="middle">request</text>
+<polyline points="440.4,148.0 504.4,148.0" fill="none" stroke="#0b7a75" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="504.4,148.0 496.4,151.6 496.4,144.4" fill="#0b7a75"/>
+<rect x="451.9" y="129.0" width="41.0" height="16" fill="#ffffff" stroke="none"/>
+<text x="472.4" y="140.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="11" font-weight="normal" fill="#0b7a75" text-anchor="middle">reply</text>
+<text x="185.0" y="228.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="11" font-weight="normal" fill="#5b6d70" text-anchor="start">cmtz_hello_field.v: 1 pipeline stage, one result per clock; 1 constant node folded at compile time</text>
+</svg>

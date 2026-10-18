@@ -12,6 +12,8 @@ measure(m, mod_p) as product;
 
 `mul` is the one primitive whose operands are both runtime values, so the two embeds become input ports (`in_embed_0`, `in_embed_1`, 5 bits each) and `product` becomes the output. The datapath is one pipeline stage: multiply, then reduce mod 17 with a chain of conditional subtracts (no `%`, which yosys would turn into a divider).
 
+![Datapath of cmtz-mul: two UART request bytes into the two embed ports, the mul node and its reduction in one pipeline stage, one reply byte back out](diagram.svg)
+
 ## What it does
 
 Send two bytes `a`, `b`, each 0 to 16, at 115200 8N1. The board replies with one byte, `a*b mod 17`. If `a` or `b` is 17 or more, the reply is `0xFF`. Wait for the reply before sending the next pair.

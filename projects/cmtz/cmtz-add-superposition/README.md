@@ -44,6 +44,8 @@ measure(rot_superposed_rotated, mod_p) as sum_rotated;  -- expect  4
 
 The program's literal embeds are replaced by input ports, so the datapath computes the same graph for any values in 0 to 16 instead of the constants in the source. It has 2 pipeline stages, one result per clock, and no `%` operators: reductions are unrolled conditional subtracts.
 
+![Datapath of cmtz-add-superposition: UART request bytes into 2 input ports, the program's DAG over 2 pipeline stages, 4 outputs back out as UART reply bytes](diagram.svg)
+
 ## Ports
 
 | Port | Bits | Carried as |

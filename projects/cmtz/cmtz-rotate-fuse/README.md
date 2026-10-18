@@ -38,6 +38,8 @@ measure(rot_rot_embed_0_embed_1_embed_2, mod_p) as fused_result;
 
 The program's literal embeds are replaced by input ports, so the datapath computes the same graph for any values in 0 to 16 instead of the constants in the source. It has 1 pipeline stage, one result per clock, and no `%` operators: reductions are unrolled conditional subtracts.
 
+![Datapath of cmtz-rotate-fuse: UART request bytes into 1 input port, the program's DAG over 1 pipeline stage, 1 output back out as UART reply bytes](diagram.svg)
+
 ## Ports
 
 | Port | Bits | Carried as |

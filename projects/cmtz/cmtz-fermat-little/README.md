@@ -43,6 +43,8 @@ measure(rot_rot_embed_0_half_double, mod_p) as double_half;  -- expect 5
 
 The program's literal embeds are replaced by input ports, so the datapath computes the same graph for any values in 0 to 16 instead of the constants in the source. It has 2 pipeline stages, one result per clock, and no `%` operators: reductions are unrolled conditional subtracts.
 
+![Datapath of cmtz-fermat-little: UART request bytes into 1 input port, the program's DAG over 2 pipeline stages, 3 outputs back out as UART reply bytes](diagram.svg)
+
 ## Ports
 
 | Port | Bits | Carried as |

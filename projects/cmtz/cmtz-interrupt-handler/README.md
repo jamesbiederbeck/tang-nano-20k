@@ -61,6 +61,8 @@ measure(rot_embed_0_embed_0, mod_p) as main_result;    -- expect 16
 
 The program's literal embeds are replaced by input ports, so the datapath computes the same graph for any values in 0 to 16 instead of the constants in the source. It has 1 pipeline stage, one result per clock, and no `%` operators: reductions are unrolled conditional subtracts.
 
+![Datapath of cmtz-interrupt-handler: UART request bytes into 3 input ports, the program's DAG over 1 pipeline stage, 2 outputs back out as UART reply bytes](diagram.svg)
+
 ## Ports
 
 | Port | Bits | Carried as |

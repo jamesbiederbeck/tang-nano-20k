@@ -61,6 +61,8 @@ measure(wing_minus, mod_p) as out_minus;     -- expect 7
 
 The program's literal embeds are replaced by input ports, so the datapath computes the same graph for any values in 0 to 16 instead of the constants in the source. It has 3 pipeline stages, one result per clock, and no `%` operators: reductions are unrolled conditional subtracts.
 
+![Datapath of cmtz-ntt-butterfly: UART request bytes into 2 input ports, the program's DAG over 3 pipeline stages, 2 outputs back out as UART reply bytes](diagram.svg)
+
 ## Ports
 
 | Port | Bits | Carried as |

@@ -55,6 +55,8 @@ measure(power_B, mod_p) as solo_B;      -- expect 1
 
 The program's literal embeds are replaced by input ports, so the datapath computes the same graph for any values in 0 to 6 instead of the constants in the source. It has 2 pipeline stages, one result per clock, and no `%` operators: reductions are unrolled conditional subtracts.
 
+![Datapath of cmtz-phasor-interference: UART request bytes into 2 input ports, the program's DAG over 2 pipeline stages, 3 outputs back out as UART reply bytes](diagram.svg)
+
 ## Ports
 
 | Port | Bits | Carried as |

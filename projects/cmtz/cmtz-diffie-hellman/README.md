@@ -70,6 +70,8 @@ measure(rot_rot_embed_0_alice_pub_bob_shared, mod_p) as bob_key;    -- expect 1
 
 The program's literal embeds are replaced by input ports, so the datapath computes the same graph for any values in 0 to 16 instead of the constants in the source. It has 2 pipeline stages, one result per clock, and no `%` operators: reductions are unrolled conditional subtracts.
 
+![Datapath of cmtz-diffie-hellman: UART request bytes into 1 input port, the program's DAG over 2 pipeline stages, 4 outputs back out as UART reply bytes](diagram.svg)
+
 ## Ports
 
 | Port | Bits | Carried as |
