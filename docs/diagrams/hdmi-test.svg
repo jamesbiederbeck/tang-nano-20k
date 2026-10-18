@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 420" width="980" height="420" role="img" aria-label="The 27 MHz crystal feeds a PLL that makes a 371.25 MHz bit clock, divided by 5 into a 74.25 MHz pixel clock. Video timing and a test pattern feed three TMDS encoders, then four 10-to-1 serializers and differential output buffers to the HDMI connector.">
+<title>hdmi-test</title>
+<rect x="0" y="0" width="980" height="420" fill="#ffffff"/>
+<text x="20.0" y="28.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="bold" fill="#5b6d70" text-anchor="start">CLOCKS</text>
+<line x1="20.0" y1="36.0" x2="960.0" y2="36.0" stroke="#c9d4d2" stroke-width="1"/>
+<rect x="20.0" y="46.0" width="150.0" height="76.0" rx="3" fill="#d9efec" stroke="#0b7a75" stroke-width="1.6"/>
+<text x="34.0" y="69.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="14" font-weight="bold" fill="#0b7a75" text-anchor="start">27 MHz</text>
+<text x="34.0" y="88.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="normal" fill="#5b6d70" text-anchor="start">crystal</text>
+<text x="34.0" y="107.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="normal" fill="#5b6d70" text-anchor="start">pin 4</text>
+<rect x="260.0" y="46.0" width="150.0" height="76.0" rx="3" fill="#ffffff" stroke="#1b2a2d" stroke-width="1.6"/>
+<text x="274.0" y="69.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="14" font-weight="bold" fill="#1b2a2d" text-anchor="start">rPLL</text>
+<text x="274.0" y="88.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="normal" fill="#5b6d70" text-anchor="start">27 x 55 / 4</text>
+<rect x="500.0" y="46.0" width="150.0" height="76.0" rx="3" fill="#ffffff" stroke="#1b2a2d" stroke-width="1.6"/>
+<text x="514.0" y="69.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="14" font-weight="bold" fill="#1b2a2d" text-anchor="start">CLKDIV</text>
+<text x="514.0" y="88.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="normal" fill="#5b6d70" text-anchor="start">divide by 5</text>
+<polyline points="170.0,84.0 260.0,84.0" fill="none" stroke="#1b2a2d" stroke-width="1.6" stroke-linejoin="round"/>
+<polygon points="260.0,84.0 252.0,87.6 252.0,80.4" fill="#1b2a2d"/>
+<polyline points="410.0,84.0 500.0,84.0" fill="none" stroke="#1b2a2d" stroke-width="1.6" stroke-linejoin="round"/>
+<polygon points="500.0,84.0 492.0,87.6 492.0,80.4" fill="#1b2a2d"/>
+<rect x="419.0" y="66.0" width="72.0" height="16" fill="#ffffff" stroke="none"/>
+<text x="455.0" y="77.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="11" font-weight="normal" fill="#5b6d70" text-anchor="middle">371.25 MHz</text>
+<text x="260.0" y="142.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="11" font-weight="normal" fill="#5b6d70" text-anchor="start">fclk = 371.25 MHz, to the serializers</text>
+<text x="500.0" y="160.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="11" font-weight="normal" fill="#5b6d70" text-anchor="start">pclk = 74.25 MHz, to all other logic</text>
+<text x="20.0" y="200.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="bold" fill="#5b6d70" text-anchor="start">VIDEO</text>
+<line x1="20.0" y1="208.0" x2="960.0" y2="208.0" stroke="#c9d4d2" stroke-width="1"/>
+<rect x="20.0" y="250.0" width="138.0" height="94.0" rx="3" fill="#ffffff" stroke="#1b2a2d" stroke-width="1.6"/>
+<text x="34.0" y="273.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="14" font-weight="bold" fill="#1b2a2d" text-anchor="start">video_timing</text>
+<text x="34.0" y="292.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="normal" fill="#5b6d70" text-anchor="start">x, y, de,</text>
+<text x="34.0" y="311.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="normal" fill="#5b6d70" text-anchor="start">hsync, vsync</text>
+<rect x="180.0" y="250.0" width="138.0" height="94.0" rx="3" fill="#ffffff" stroke="#1b2a2d" stroke-width="1.6"/>
+<text x="194.0" y="273.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="14" font-weight="bold" fill="#1b2a2d" text-anchor="start">pattern</text>
+<text x="194.0" y="292.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="normal" fill="#5b6d70" text-anchor="start">bars, ramp,</text>
+<text x="194.0" y="311.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="normal" fill="#5b6d70" text-anchor="start">moving marker</text>
+<rect x="340.0" y="250.0" width="138.0" height="94.0" rx="3" fill="#ffffff" stroke="#1b2a2d" stroke-width="1.6"/>
+<text x="354.0" y="273.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="14" font-weight="bold" fill="#1b2a2d" text-anchor="start">tmds_encoder</text>
+<text x="354.0" y="292.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="normal" fill="#5b6d70" text-anchor="start">x 3: B, G, R</text>
+<text x="354.0" y="311.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="normal" fill="#5b6d70" text-anchor="start">8b to 10b</text>
+<rect x="500.0" y="250.0" width="138.0" height="94.0" rx="3" fill="#ffffff" stroke="#1b2a2d" stroke-width="1.6"/>
+<text x="514.0" y="273.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="14" font-weight="bold" fill="#1b2a2d" text-anchor="start">OSER10</text>
+<text x="514.0" y="292.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="normal" fill="#5b6d70" text-anchor="start">x 4, 10:1</text>
+<text x="514.0" y="311.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="normal" fill="#5b6d70" text-anchor="start">3 data + clock</text>
+<rect x="660.0" y="250.0" width="138.0" height="94.0" rx="3" fill="#ffffff" stroke="#1b2a2d" stroke-width="1.6"/>
+<text x="674.0" y="273.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="14" font-weight="bold" fill="#1b2a2d" text-anchor="start">TLVDS_OBUF</text>
+<text x="674.0" y="292.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="normal" fill="#5b6d70" text-anchor="start">x 4</text>
+<text x="674.0" y="311.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="normal" fill="#5b6d70" text-anchor="start">differential</text>
+<rect x="820.0" y="250.0" width="138.0" height="94.0" rx="3" fill="#d9efec" stroke="#0b7a75" stroke-width="1.6"/>
+<text x="834.0" y="273.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="14" font-weight="bold" fill="#0b7a75" text-anchor="start">HDMI</text>
+<text x="834.0" y="292.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="normal" fill="#5b6d70" text-anchor="start">pins 33 to 40</text>
+<polyline points="158.0,297.0 180.0,297.0" fill="none" stroke="#1b2a2d" stroke-width="1.6" stroke-linejoin="round"/>
+<polygon points="180.0,297.0 172.0,300.6 172.0,293.4" fill="#1b2a2d"/>
+<polyline points="318.0,297.0 340.0,297.0" fill="none" stroke="#1b2a2d" stroke-width="1.6" stroke-linejoin="round"/>
+<polygon points="340.0,297.0 332.0,300.6 332.0,293.4" fill="#1b2a2d"/>
+<polyline points="478.0,297.0 500.0,297.0" fill="none" stroke="#1b2a2d" stroke-width="1.6" stroke-linejoin="round"/>
+<polygon points="500.0,297.0 492.0,300.6 492.0,293.4" fill="#1b2a2d"/>
+<polyline points="638.0,297.0 660.0,297.0" fill="none" stroke="#0b7a75" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="660.0,297.0 652.0,300.6 652.0,293.4" fill="#0b7a75"/>
+<polyline points="798.0,297.0 820.0,297.0" fill="none" stroke="#0b7a75" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="820.0,297.0 812.0,300.6 812.0,293.4" fill="#0b7a75"/>
+<polyline points="120.0,228.0 120.0,250.0" fill="none" stroke="#1b2a2d" stroke-width="1.6" stroke-linejoin="round"/>
+<polygon points="120.0,250.0 117.3,244.0 122.7,244.0" fill="#1b2a2d"/>
+<text x="120.0" y="223.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="11" font-weight="normal" fill="#0b7a75" text-anchor="middle">pclk</text>
+<polyline points="280.0,228.0 280.0,250.0" fill="none" stroke="#1b2a2d" stroke-width="1.6" stroke-linejoin="round"/>
+<polygon points="280.0,250.0 277.3,244.0 282.7,244.0" fill="#1b2a2d"/>
+<text x="280.0" y="223.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="11" font-weight="normal" fill="#0b7a75" text-anchor="middle">pclk</text>
+<polyline points="440.0,228.0 440.0,250.0" fill="none" stroke="#1b2a2d" stroke-width="1.6" stroke-linejoin="round"/>
+<polygon points="440.0,250.0 437.3,244.0 442.7,244.0" fill="#1b2a2d"/>
+<text x="440.0" y="223.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="11" font-weight="normal" fill="#0b7a75" text-anchor="middle">pclk</text>
+<polyline points="540.0,228.0 540.0,250.0" fill="none" stroke="#1b2a2d" stroke-width="1.6" stroke-linejoin="round"/>
+<polygon points="540.0,250.0 537.3,244.0 542.7,244.0" fill="#1b2a2d"/>
+<text x="540.0" y="223.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="11" font-weight="normal" fill="#0b7a75" text-anchor="middle">fclk</text>
+<polyline points="600.0,228.0 600.0,250.0" fill="none" stroke="#1b2a2d" stroke-width="1.6" stroke-linejoin="round"/>
+<polygon points="600.0,250.0 597.3,244.0 602.7,244.0" fill="#1b2a2d"/>
+<text x="600.0" y="223.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="11" font-weight="normal" fill="#0b7a75" text-anchor="middle">pclk</text>
+<polyline points="60.0,344.0 60.0,380.0 410.0,380.0 410.0,344.0" fill="none" stroke="#1b2a2d" stroke-width="1.6" stroke-linejoin="round"/>
+<polygon points="410.0,344.0 413.6,352.0 406.4,352.0" fill="#1b2a2d"/>
+<rect x="154.2" y="363.0" width="111.6" height="16" fill="#ffffff" stroke="none"/>
+<text x="210.0" y="374.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="11" font-weight="normal" fill="#5b6d70" text-anchor="middle">de, hsync, vsync</text>
+</svg>

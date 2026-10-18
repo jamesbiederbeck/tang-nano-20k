@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 440" width="980" height="440" role="img" aria-label="The PC connects over USB-C to the BL616 debugger, which gives the FPGA a JTAG link and a UART. The 27 MHz crystal and the SPI flash connect to the FPGA, which drives six LEDs and the HDMI output.">
+<title>The board as the PC sees it</title>
+<rect x="0" y="0" width="980" height="440" fill="#ffffff"/>
+<rect x="20.0" y="147.0" width="110.0" height="58.0" rx="3" fill="#ffffff" stroke="#1b2a2d" stroke-width="1.6"/>
+<text x="34.0" y="170.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="14" font-weight="bold" fill="#1b2a2d" text-anchor="start">PC</text>
+<text x="34.0" y="189.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="normal" fill="#5b6d70" text-anchor="start">Linux</text>
+<rect x="190.0" y="138.0" width="214.0" height="76.0" rx="3" fill="#ffffff" stroke="#1b2a2d" stroke-width="1.6"/>
+<text x="204.0" y="161.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="14" font-weight="bold" fill="#1b2a2d" text-anchor="start">BL616 debugger</text>
+<text x="204.0" y="180.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="normal" fill="#5b6d70" text-anchor="start">shows up as an FT2232</text>
+<text x="204.0" y="199.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="normal" fill="#5b6d70" text-anchor="start">USB id 0403:6010</text>
+<rect x="530.0" y="120.0" width="190.0" height="150.0" rx="3" fill="#ffffff" stroke="#1b2a2d" stroke-width="1.6"/>
+<text x="544.0" y="143.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="14" font-weight="bold" fill="#1b2a2d" text-anchor="start">GW2AR-18 FPGA</text>
+<text x="544.0" y="162.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="normal" fill="#5b6d70" text-anchor="start">20736 LUT4</text>
+<text x="544.0" y="181.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="normal" fill="#5b6d70" text-anchor="start">48 multipliers</text>
+<rect x="530.0" y="10.0" width="190.0" height="58.0" rx="3" fill="#d9efec" stroke="#0b7a75" stroke-width="1.6"/>
+<text x="544.0" y="33.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="14" font-weight="bold" fill="#0b7a75" text-anchor="start">6 LEDs</text>
+<text x="544.0" y="52.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="normal" fill="#5b6d70" text-anchor="start">active low</text>
+<rect x="530.0" y="340.0" width="190.0" height="58.0" rx="3" fill="#d9efec" stroke="#0b7a75" stroke-width="1.6"/>
+<text x="544.0" y="363.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="14" font-weight="bold" fill="#0b7a75" text-anchor="start">HDMI output</text>
+<text x="544.0" y="382.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="normal" fill="#5b6d70" text-anchor="start">pins 33 to 40</text>
+<rect x="800.0" y="140.0" width="170.0" height="58.0" rx="3" fill="#ffffff" stroke="#1b2a2d" stroke-width="1.6"/>
+<text x="814.0" y="163.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="14" font-weight="bold" fill="#1b2a2d" text-anchor="start">27 MHz crystal</text>
+<text x="814.0" y="182.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="normal" fill="#5b6d70" text-anchor="start">pin 4</text>
+<rect x="800.0" y="216.0" width="170.0" height="58.0" rx="3" fill="#ffffff" stroke="#1b2a2d" stroke-width="1.6"/>
+<text x="814.0" y="239.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="14" font-weight="bold" fill="#1b2a2d" text-anchor="start">SPI flash</text>
+<text x="814.0" y="258.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="normal" fill="#5b6d70" text-anchor="start">64 Mbit, bitstream</text>
+<polyline points="130.0,176.0 190.0,176.0" fill="none" stroke="#1b2a2d" stroke-width="1.6" stroke-linejoin="round"/>
+<polygon points="190.0,176.0 182.0,179.6 182.0,172.4" fill="#1b2a2d"/>
+<polygon points="130.0,176.0 138.0,172.4 138.0,179.6" fill="#1b2a2d"/>
+<rect x="140.5" y="158.0" width="39.0" height="16" fill="#ffffff" stroke="none"/>
+<text x="160.0" y="169.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="11" font-weight="normal" fill="#5b6d70" text-anchor="middle">USB-C</text>
+<polyline points="404.0,160.0 530.0,160.0" fill="none" stroke="#1b2a2d" stroke-width="1.6" stroke-linejoin="round"/>
+<polygon points="530.0,160.0 522.0,163.6 522.0,156.4" fill="#1b2a2d"/>
+<polygon points="404.0,160.0 412.0,156.4 412.0,163.6" fill="#1b2a2d"/>
+<rect x="431.0" y="142.0" width="72.0" height="16" fill="#ffffff" stroke="none"/>
+<text x="467.0" y="153.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="11" font-weight="normal" fill="#5b6d70" text-anchor="middle">JTAG, ch A</text>
+<polyline points="404.0,196.0 530.0,200.0" fill="none" stroke="#1b2a2d" stroke-width="1.6" stroke-linejoin="round"/>
+<polygon points="530.0,200.0 521.9,203.3 522.1,196.1" fill="#1b2a2d"/>
+<polygon points="404.0,196.0 412.1,192.7 411.9,199.9" fill="#1b2a2d"/>
+<rect x="408.0" y="191.0" width="72.0" height="16" fill="#ffffff" stroke="none"/>
+<text x="411.0" y="202.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="11" font-weight="normal" fill="#5b6d70" text-anchor="start">UART, ch B</text>
+<rect x="424.4" y="205.0" width="85.2" height="16" fill="#ffffff" stroke="none"/>
+<text x="467.0" y="216.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="11" font-weight="normal" fill="#5b6d70" text-anchor="middle">tx 69, rx 70</text>
+<polyline points="800.0,169.0 720.0,169.0" fill="none" stroke="#1b2a2d" stroke-width="1.6" stroke-linejoin="round"/>
+<polygon points="720.0,169.0 728.0,165.4 728.0,172.6" fill="#1b2a2d"/>
+<polyline points="800.0,245.0 720.0,245.0" fill="none" stroke="#1b2a2d" stroke-width="1.6" stroke-linejoin="round"/>
+<polygon points="720.0,245.0 728.0,241.4 728.0,248.6" fill="#1b2a2d"/>
+<polygon points="800.0,245.0 792.0,248.6 792.0,241.4" fill="#1b2a2d"/>
+<polyline points="625.0,120.0 625.0,68.0" fill="none" stroke="#0b7a75" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="625.0,68.0 628.6,76.0 621.4,76.0" fill="#0b7a75"/>
+<rect x="621.1" y="87.0" width="91.8" height="16" fill="#ffffff" stroke="none"/>
+<text x="667.0" y="98.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="11" font-weight="normal" fill="#5b6d70" text-anchor="middle">pins 15 to 20</text>
+<polyline points="625.0,270.0 625.0,340.0" fill="none" stroke="#0b7a75" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="625.0,340.0 621.4,332.0 628.6,332.0" fill="#0b7a75"/>
+</svg>

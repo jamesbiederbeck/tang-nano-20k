@@ -17,22 +17,7 @@ Six states cycle forever. Both directions are red between phases, so green never
 
 One full cycle is 16 seconds. State 5 is also the power-up state, so the board starts all red.
 
-```mermaid
-stateDiagram-v2
-    [*] --> AllRed2
-    AllRed2: 5 all red (1 s)
-    NSGreen: 0 NS green (5 s)
-    NSYellow: 1 NS yellow (2 s)
-    AllRed1: 2 all red (1 s)
-    EWGreen: 3 EW green (5 s)
-    EWYellow: 4 EW yellow (2 s)
-    AllRed2 --> NSGreen
-    NSGreen --> NSYellow
-    NSYellow --> AllRed1
-    AllRed1 --> EWGreen
-    EWGreen --> EWYellow
-    EWYellow --> AllRed2
-```
+![stoplight: six states in a loop, NS green 5 s, NS yellow 2 s, all red 1 s, EW green 5 s, EW yellow 2 s, all red 1 s.](../../docs/diagrams/stoplight.svg)
 
 ## Lamps and pins
 

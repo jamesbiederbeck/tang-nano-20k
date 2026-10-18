@@ -7,33 +7,13 @@ Open-source flow via [APIO](https://github.com/FPGAwars/apio): yosys, nextpnr-hi
 
 The tool flow, from Verilog to the board:
 
-```mermaid
-flowchart LR
-    v["Verilog<br/>*.v"] --> y["yosys<br/>synth_gowin"]
-    y -->|"hardware.json"| n["nextpnr-himbaechel<br/>place and route"]
-    pins["pins.cst"] --> n
-    n -->|"hardware.pnr.json"| g["gowin_pack"]
-    g -->|"hardware.fs"| o["openFPGALoader"]
-    o -->|"load to SRAM<br/>gone on power cycle"| fpga["FPGA"]
-    o -->|"-f: write SPI flash<br/>persists"| fpga
-    v --> sim["apio test<br/>iverilog"]
-    tb["testbench<br/>*_tb.v"] --> sim
-```
+![Tool flow: Verilog and pins.cst go through yosys, nextpnr and gowin_pack to a bitstream that openFPGALoader writes to SRAM or SPI flash; a testbench runs in simulation with apio test.](docs/diagrams/toolchain.svg)
 
 `apio build` runs yosys, nextpnr and gowin_pack in one step. `apio test` runs the testbenches in simulation, with no board.
 
 The board, as the PC sees it:
 
-```mermaid
-flowchart LR
-    pc["PC"] <-->|"USB-C"| bl["BL616 debugger<br/>shows up as an FT2232<br/>0403:6010"]
-    bl <-->|"channel A: JTAG"| fpga["GW2AR-18 FPGA"]
-    bl <-->|"channel B: UART<br/>tx pin 69, rx pin 70"| fpga
-    xtal["27 MHz crystal"] -->|"pin 4"| fpga
-    flash["64 Mbit SPI flash<br/>holds the bitstream"] <--> fpga
-    fpga -->|"pins 15 to 20"| led["6 LEDs<br/>active low"]
-    fpga -->|"pins 33 to 40"| hdmi["HDMI output"]
-```
+![The board as the PC sees it: USB-C to the BL616 debugger, which gives the FPGA JTAG and a UART; the crystal, SPI flash, six LEDs and HDMI connect to the FPGA.](docs/diagrams/board.svg)
 
 ## Why this repo exists
 
@@ -78,7 +58,8 @@ The high-level steps are in `developing.md`, under "Starting a new project".
 | Path | What |
 |---|---|
 | `projects/<name>/` | One APIO project each: `apio.ini`, Verilog, `pins.cst` |
-| `docs/` | Notes on the Hackaday series and where it informed this repo |
+| `docs/` | Notes on the Hackaday series and where it informed this repo. `docs/diagrams/` holds the SVG diagrams the READMEs show. |
+| `scripts/` | `draw_diagrams.py` draws the hand-made overview SVGs. `generate-diagrams.sh` makes a Yosys schematic of one small module. |
 | `reference/` | Dumps and notes from the board itself |
 | `udev/` | udev rule that gives the `plugdev` group access to the on-board debugger |
 | `developing.md` | What is installed, where, what was changed on this machine, workflow, pitfalls |

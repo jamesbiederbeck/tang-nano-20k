@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 380" width="1180" height="380" role="img" aria-label="Verilog and pins.cst go through yosys, nextpnr and gowin_pack to a bitstream that openFPGALoader writes to the FPGA's SRAM or its SPI flash. The same Verilog plus a testbench run in simulation with apio test.">
+<title>Tool flow</title>
+<rect x="0" y="0" width="1180" height="380" fill="#ffffff"/>
+<rect x="20.0" y="110.0" width="150.0" height="58.0" rx="3" fill="#ffffff" stroke="#1b2a2d" stroke-width="1.6"/>
+<text x="34.0" y="133.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="14" font-weight="bold" fill="#1b2a2d" text-anchor="start">Verilog</text>
+<text x="34.0" y="152.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="normal" fill="#5b6d70" text-anchor="start">*.v</text>
+<rect x="260.0" y="110.0" width="150.0" height="58.0" rx="3" fill="#ffffff" stroke="#1b2a2d" stroke-width="1.6"/>
+<text x="274.0" y="133.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="14" font-weight="bold" fill="#1b2a2d" text-anchor="start">yosys</text>
+<text x="274.0" y="152.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="normal" fill="#5b6d70" text-anchor="start">synth_gowin</text>
+<rect x="500.0" y="110.0" width="150.0" height="58.0" rx="3" fill="#ffffff" stroke="#1b2a2d" stroke-width="1.6"/>
+<text x="514.0" y="133.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="14" font-weight="bold" fill="#1b2a2d" text-anchor="start">nextpnr</text>
+<text x="514.0" y="152.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="normal" fill="#5b6d70" text-anchor="start">place and route</text>
+<rect x="740.0" y="110.0" width="150.0" height="58.0" rx="3" fill="#ffffff" stroke="#1b2a2d" stroke-width="1.6"/>
+<text x="754.0" y="133.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="14" font-weight="bold" fill="#1b2a2d" text-anchor="start">gowin_pack</text>
+<text x="754.0" y="152.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="normal" fill="#5b6d70" text-anchor="start">bitstream</text>
+<rect x="980.0" y="110.0" width="180.0" height="58.0" rx="3" fill="#ffffff" stroke="#1b2a2d" stroke-width="1.6"/>
+<text x="994.0" y="133.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="14" font-weight="bold" fill="#1b2a2d" text-anchor="start">openFPGALoader</text>
+<text x="994.0" y="152.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="normal" fill="#5b6d70" text-anchor="start">JTAG</text>
+<rect x="500.0" y="14.0" width="150.0" height="58.0" rx="3" fill="#ffffff" stroke="#1b2a2d" stroke-width="1.6"/>
+<text x="514.0" y="37.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="14" font-weight="bold" fill="#1b2a2d" text-anchor="start">pins.cst</text>
+<text x="514.0" y="56.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="normal" fill="#5b6d70" text-anchor="start">pin numbers</text>
+<rect x="240" y="96" width="670" height="90" rx="6" fill="none" stroke="#5b6d70" stroke-width="1.2" stroke-dasharray="5 4"/>
+<text x="250.0" y="89.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="bold" fill="#5b6d70" text-anchor="start">apio build</text>
+<polyline points="170.0,139.0 260.0,139.0" fill="none" stroke="#1b2a2d" stroke-width="1.6" stroke-linejoin="round"/>
+<polygon points="260.0,139.0 252.0,142.6 252.0,135.4" fill="#1b2a2d"/>
+<polyline points="410.0,139.0 500.0,139.0" fill="none" stroke="#1b2a2d" stroke-width="1.6" stroke-linejoin="round"/>
+<polygon points="500.0,139.0 492.0,142.6 492.0,135.4" fill="#1b2a2d"/>
+<rect x="438.8" y="121.0" width="32.4" height="16" fill="#ffffff" stroke="none"/>
+<text x="455.0" y="132.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="11" font-weight="normal" fill="#5b6d70" text-anchor="middle">json</text>
+<polyline points="650.0,139.0 740.0,139.0" fill="none" stroke="#1b2a2d" stroke-width="1.6" stroke-linejoin="round"/>
+<polygon points="740.0,139.0 732.0,142.6 732.0,135.4" fill="#1b2a2d"/>
+<rect x="672.2" y="121.0" width="45.6" height="16" fill="#ffffff" stroke="none"/>
+<text x="695.0" y="132.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="11" font-weight="normal" fill="#5b6d70" text-anchor="middle">placed</text>
+<polyline points="890.0,139.0 980.0,139.0" fill="none" stroke="#1b2a2d" stroke-width="1.6" stroke-linejoin="round"/>
+<polygon points="980.0,139.0 972.0,142.6 972.0,135.4" fill="#1b2a2d"/>
+<rect x="922.1" y="121.0" width="25.8" height="16" fill="#ffffff" stroke="none"/>
+<text x="935.0" y="132.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="11" font-weight="normal" fill="#5b6d70" text-anchor="middle">.fs</text>
+<polyline points="575.0,72.0 575.0,110.0" fill="none" stroke="#1b2a2d" stroke-width="1.6" stroke-linejoin="round"/>
+<polygon points="575.0,110.0 571.4,102.0 578.6,102.0" fill="#1b2a2d"/>
+<rect x="880.0" y="270.0" width="180.0" height="58.0" rx="3" fill="#d9efec" stroke="#0b7a75" stroke-width="1.6"/>
+<text x="894.0" y="293.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="14" font-weight="bold" fill="#0b7a75" text-anchor="start">FPGA SRAM</text>
+<text x="894.0" y="312.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="normal" fill="#5b6d70" text-anchor="start">gone on power cycle</text>
+<rect x="1075.0" y="270.0" width="100.0" height="58.0" rx="3" fill="#d9efec" stroke="#0b7a75" stroke-width="1.6"/>
+<text x="1089.0" y="293.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="14" font-weight="bold" fill="#0b7a75" text-anchor="start">SPI flash</text>
+<text x="1089.0" y="312.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="normal" fill="#5b6d70" text-anchor="start">persists</text>
+<polyline points="1000.0,168.0 1000.0,270.0" fill="none" stroke="#0b7a75" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="1000.0,270.0 996.4,262.0 1003.6,262.0" fill="#0b7a75"/>
+<rect x="1004.0" y="212.0" width="32.4" height="16" fill="#ffffff" stroke="none"/>
+<text x="1007.0" y="223.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="11" font-weight="normal" fill="#5b6d70" text-anchor="start">load</text>
+<polyline points="1130.0,168.0 1130.0,270.0" fill="none" stroke="#0b7a75" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="1130.0,270.0 1126.4,262.0 1133.6,262.0" fill="#0b7a75"/>
+<rect x="1134.0" y="212.0" width="19.2" height="16" fill="#ffffff" stroke="none"/>
+<text x="1137.0" y="223.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="11" font-weight="normal" fill="#5b6d70" text-anchor="start">-f</text>
+<rect x="20.0" y="270.0" width="150.0" height="58.0" rx="3" fill="#ffffff" stroke="#1b2a2d" stroke-width="1.6"/>
+<text x="34.0" y="293.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="14" font-weight="bold" fill="#1b2a2d" text-anchor="start">testbench</text>
+<text x="34.0" y="312.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="normal" fill="#5b6d70" text-anchor="start">*_tb.v</text>
+<rect x="260.0" y="270.0" width="210.0" height="58.0" rx="3" fill="#ffffff" stroke="#1b2a2d" stroke-width="1.6"/>
+<text x="274.0" y="293.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="14" font-weight="bold" fill="#1b2a2d" text-anchor="start">apio test</text>
+<text x="274.0" y="312.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="normal" fill="#5b6d70" text-anchor="start">iverilog, no board</text>
+<polyline points="95.0,168.0 95.0,230.0 365.0,230.0 365.0,270.0" fill="none" stroke="#1b2a2d" stroke-width="1.6" stroke-linejoin="round"/>
+<polygon points="365.0,270.0 361.4,262.0 368.6,262.0" fill="#1b2a2d"/>
+<polyline points="170.0,299.0 260.0,299.0" fill="none" stroke="#1b2a2d" stroke-width="1.6" stroke-linejoin="round"/>
+<polygon points="260.0,299.0 252.0,302.6 252.0,295.4" fill="#1b2a2d"/>
+</svg>

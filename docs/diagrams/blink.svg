@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 170" width="780" height="170" role="img" aria-label="The 27 MHz clock drives a 25-bit counter. Bits 24 down to 19 pass through inverters to the six active-low LEDs.">
+<title>blink</title>
+<rect x="0" y="0" width="780" height="170" fill="#ffffff"/>
+<rect x="20.0" y="46.0" width="120.0" height="76.0" rx="3" fill="#d9efec" stroke="#0b7a75" stroke-width="1.6"/>
+<text x="34.0" y="69.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="14" font-weight="bold" fill="#0b7a75" text-anchor="start">clk</text>
+<text x="34.0" y="88.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="normal" fill="#5b6d70" text-anchor="start">pin 4</text>
+<text x="34.0" y="107.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="normal" fill="#5b6d70" text-anchor="start">27 MHz</text>
+<rect x="190.0" y="40.0" width="190.0" height="88.0" rx="3" fill="#ffffff" stroke="#1b2a2d" stroke-width="1.6"/>
+<text x="204.0" y="63.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="14" font-weight="bold" fill="#1b2a2d" text-anchor="start">count</text>
+<text x="204.0" y="82.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="normal" fill="#5b6d70" text-anchor="start">25-bit register</text>
+<text x="204.0" y="101.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="normal" fill="#5b6d70" text-anchor="start">+1 every clock</text>
+<polyline points="140.0,84.0 190.0,84.0" fill="none" stroke="#1b2a2d" stroke-width="1.6" stroke-linejoin="round"/>
+<polygon points="190.0,84.0 182.0,87.6 182.0,80.4" fill="#1b2a2d"/>
+<polyline points="380.0,84.0 466.0,84.0" fill="none" stroke="#1b2a2d" stroke-width="1.6" stroke-linejoin="round"/>
+<polygon points="466.0,84.0 458.0,87.6 458.0,80.4" fill="#1b2a2d"/>
+<line x1="421.0" y1="90.0" x2="429.0" y2="78.0" stroke="#1b2a2d" stroke-width="1.4"/>
+<text x="431.0" y="75.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="11" font-weight="normal" fill="#5b6d70" text-anchor="start">6</text>
+<text x="425.0" y="108.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="11" font-weight="normal" fill="#5b6d70" text-anchor="middle">count[24:19]</text>
+<polygon points="468.0,67.0 468.0,101.0 504.0,84.0" fill="#ffffff" stroke="#1b2a2d" stroke-width="1.6"/>
+<circle cx="509.0" cy="84.0" r="5" fill="#ffffff" stroke="#1b2a2d" stroke-width="1.6"/>
+<text x="490.0" y="124.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="11" font-weight="normal" fill="#5b6d70" text-anchor="middle">NOT x6</text>
+<polyline points="518.0,84.0 590.0,84.0" fill="none" stroke="#0b7a75" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="590.0,84.0 582.0,87.6 582.0,80.4" fill="#0b7a75"/>
+<line x1="548.0" y1="90.0" x2="556.0" y2="78.0" stroke="#1b2a2d" stroke-width="1.4"/>
+<text x="558.0" y="75.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="11" font-weight="normal" fill="#5b6d70" text-anchor="start">6</text>
+<rect x="590.0" y="46.0" width="170.0" height="76.0" rx="3" fill="#d9efec" stroke="#0b7a75" stroke-width="1.6"/>
+<text x="604.0" y="69.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="14" font-weight="bold" fill="#0b7a75" text-anchor="start">leds[5:0]</text>
+<text x="604.0" y="88.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="normal" fill="#5b6d70" text-anchor="start">pins 15 to 20</text>
+<text x="604.0" y="107.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="normal" fill="#5b6d70" text-anchor="start">active low</text>
+</svg>

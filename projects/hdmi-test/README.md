@@ -11,20 +11,7 @@ A 1280x720 @ 60 Hz HDMI (DVI) test pattern on the Tang Nano 20K, with no vendor 
 
 ## How it works
 
-```mermaid
-flowchart LR
-    xtal["27 MHz crystal<br/>pin 4"] --> pll["rPLL<br/>x55 / 4"]
-    pll -->|"371.25 MHz<br/>bit clock"| div["CLKDIV<br/>/5"]
-    div -->|"74.25 MHz<br/>pixel clock"| timing["video_timing<br/>x, y, de, hsync, vsync"]
-    timing -->|"x, y"| pat["pattern<br/>bars, ramp, marker"]
-    pat -->|"24-bit RGB"| enc["3 x tmds_encoder<br/>8b to 10b"]
-    timing -->|"de, hsync, vsync"| enc
-    enc -->|"3 x 10 bits"| ser["4 x OSER10<br/>10:1 serializer"]
-    pll -->|"bit clock"| ser
-    div -->|"pixel clock"| ser
-    ser --> ob["4 x TLVDS_OBUF<br/>differential"]
-    ob --> hdmi["HDMI<br/>pins 33 to 40"]
-```
+![hdmi-test: crystal to PLL to pixel clock; video timing and pattern feed three TMDS encoders, four serializers and differential buffers to HDMI.](../../docs/diagrams/hdmi-test.svg)
 
 Three of the four serializers carry blue (with hsync and vsync during blanking), green and red. The fourth sends the constant pattern `0000011111`, which is the pixel clock.
 

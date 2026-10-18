@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 460" width="900" height="460" role="img" aria-label="Six states in a loop: north-south green 5 seconds, north-south yellow 2, all red 1, east-west green 5, east-west yellow 2, all red 1. The cycle takes 16 seconds and starts in the last all-red state at power-up.">
+<title>stoplight</title>
+<rect x="0" y="0" width="900" height="460" fill="#ffffff"/>
+<text x="30.0" y="34.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="bold" fill="#5b6d70" text-anchor="start">TWO-WAY INTERSECTION, 16 S PER CYCLE. BOTH DIRECTIONS ARE RED BETWEEN PHASES.</text>
+<rect x="30.0" y="60.0" width="250.0" height="116.0" rx="3" fill="#ffffff" stroke="#1b2a2d" stroke-width="1.6"/>
+<text x="44.0" y="83.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="14" font-weight="bold" fill="#1b2a2d" text-anchor="start">0 · NS green</text>
+<text x="44.0" y="102.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="normal" fill="#5b6d70" text-anchor="start">5 s</text>
+<text x="44.0" y="132.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="bold" fill="#5b6d70" text-anchor="start">NS</text>
+<circle cx="96.0" cy="128.0" r="9" fill="#e6ebea" stroke="#b9c4c2" stroke-width="1.4"/>
+<circle cx="126.0" cy="128.0" r="9" fill="#e6ebea" stroke="#b9c4c2" stroke-width="1.4"/>
+<circle cx="156.0" cy="128.0" r="9" fill="#2e9460" stroke="#1b2a2d" stroke-width="1.4"/>
+<text x="44.0" y="158.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="bold" fill="#5b6d70" text-anchor="start">EW</text>
+<circle cx="96.0" cy="154.0" r="9" fill="#d64533" stroke="#1b2a2d" stroke-width="1.4"/>
+<circle cx="126.0" cy="154.0" r="9" fill="#e6ebea" stroke="#b9c4c2" stroke-width="1.4"/>
+<circle cx="156.0" cy="154.0" r="9" fill="#e6ebea" stroke="#b9c4c2" stroke-width="1.4"/>
+<rect x="325.0" y="60.0" width="250.0" height="116.0" rx="3" fill="#ffffff" stroke="#1b2a2d" stroke-width="1.6"/>
+<text x="339.0" y="83.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="14" font-weight="bold" fill="#1b2a2d" text-anchor="start">1 · NS yellow</text>
+<text x="339.0" y="102.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="normal" fill="#5b6d70" text-anchor="start">2 s</text>
+<text x="339.0" y="132.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="bold" fill="#5b6d70" text-anchor="start">NS</text>
+<circle cx="391.0" cy="128.0" r="9" fill="#e6ebea" stroke="#b9c4c2" stroke-width="1.4"/>
+<circle cx="421.0" cy="128.0" r="9" fill="#e0a800" stroke="#1b2a2d" stroke-width="1.4"/>
+<circle cx="451.0" cy="128.0" r="9" fill="#e6ebea" stroke="#b9c4c2" stroke-width="1.4"/>
+<text x="339.0" y="158.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="bold" fill="#5b6d70" text-anchor="start">EW</text>
+<circle cx="391.0" cy="154.0" r="9" fill="#d64533" stroke="#1b2a2d" stroke-width="1.4"/>
+<circle cx="421.0" cy="154.0" r="9" fill="#e6ebea" stroke="#b9c4c2" stroke-width="1.4"/>
+<circle cx="451.0" cy="154.0" r="9" fill="#e6ebea" stroke="#b9c4c2" stroke-width="1.4"/>
+<rect x="620.0" y="60.0" width="250.0" height="116.0" rx="3" fill="#ffffff" stroke="#1b2a2d" stroke-width="1.6"/>
+<text x="634.0" y="83.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="14" font-weight="bold" fill="#1b2a2d" text-anchor="start">2 · all red</text>
+<text x="634.0" y="102.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="normal" fill="#5b6d70" text-anchor="start">1 s</text>
+<text x="634.0" y="132.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="bold" fill="#5b6d70" text-anchor="start">NS</text>
+<circle cx="686.0" cy="128.0" r="9" fill="#d64533" stroke="#1b2a2d" stroke-width="1.4"/>
+<circle cx="716.0" cy="128.0" r="9" fill="#e6ebea" stroke="#b9c4c2" stroke-width="1.4"/>
+<circle cx="746.0" cy="128.0" r="9" fill="#e6ebea" stroke="#b9c4c2" stroke-width="1.4"/>
+<text x="634.0" y="158.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="bold" fill="#5b6d70" text-anchor="start">EW</text>
+<circle cx="686.0" cy="154.0" r="9" fill="#d64533" stroke="#1b2a2d" stroke-width="1.4"/>
+<circle cx="716.0" cy="154.0" r="9" fill="#e6ebea" stroke="#b9c4c2" stroke-width="1.4"/>
+<circle cx="746.0" cy="154.0" r="9" fill="#e6ebea" stroke="#b9c4c2" stroke-width="1.4"/>
+<rect x="620.0" y="290.0" width="250.0" height="116.0" rx="3" fill="#ffffff" stroke="#1b2a2d" stroke-width="1.6"/>
+<text x="634.0" y="313.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="14" font-weight="bold" fill="#1b2a2d" text-anchor="start">3 · EW green</text>
+<text x="634.0" y="332.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="normal" fill="#5b6d70" text-anchor="start">5 s</text>
+<text x="634.0" y="362.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="bold" fill="#5b6d70" text-anchor="start">NS</text>
+<circle cx="686.0" cy="358.0" r="9" fill="#d64533" stroke="#1b2a2d" stroke-width="1.4"/>
+<circle cx="716.0" cy="358.0" r="9" fill="#e6ebea" stroke="#b9c4c2" stroke-width="1.4"/>
+<circle cx="746.0" cy="358.0" r="9" fill="#e6ebea" stroke="#b9c4c2" stroke-width="1.4"/>
+<text x="634.0" y="388.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="bold" fill="#5b6d70" text-anchor="start">EW</text>
+<circle cx="686.0" cy="384.0" r="9" fill="#e6ebea" stroke="#b9c4c2" stroke-width="1.4"/>
+<circle cx="716.0" cy="384.0" r="9" fill="#e6ebea" stroke="#b9c4c2" stroke-width="1.4"/>
+<circle cx="746.0" cy="384.0" r="9" fill="#2e9460" stroke="#1b2a2d" stroke-width="1.4"/>
+<rect x="325.0" y="290.0" width="250.0" height="116.0" rx="3" fill="#ffffff" stroke="#1b2a2d" stroke-width="1.6"/>
+<text x="339.0" y="313.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="14" font-weight="bold" fill="#1b2a2d" text-anchor="start">4 · EW yellow</text>
+<text x="339.0" y="332.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="normal" fill="#5b6d70" text-anchor="start">2 s</text>
+<text x="339.0" y="362.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="bold" fill="#5b6d70" text-anchor="start">NS</text>
+<circle cx="391.0" cy="358.0" r="9" fill="#d64533" stroke="#1b2a2d" stroke-width="1.4"/>
+<circle cx="421.0" cy="358.0" r="9" fill="#e6ebea" stroke="#b9c4c2" stroke-width="1.4"/>
+<circle cx="451.0" cy="358.0" r="9" fill="#e6ebea" stroke="#b9c4c2" stroke-width="1.4"/>
+<text x="339.0" y="388.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="bold" fill="#5b6d70" text-anchor="start">EW</text>
+<circle cx="391.0" cy="384.0" r="9" fill="#e6ebea" stroke="#b9c4c2" stroke-width="1.4"/>
+<circle cx="421.0" cy="384.0" r="9" fill="#e0a800" stroke="#1b2a2d" stroke-width="1.4"/>
+<circle cx="451.0" cy="384.0" r="9" fill="#e6ebea" stroke="#b9c4c2" stroke-width="1.4"/>
+<rect x="30.0" y="290.0" width="250.0" height="116.0" rx="3" fill="#ffffff" stroke="#1b2a2d" stroke-width="1.6"/>
+<text x="44.0" y="313.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="14" font-weight="bold" fill="#1b2a2d" text-anchor="start">5 · all red</text>
+<text x="44.0" y="332.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="normal" fill="#5b6d70" text-anchor="start">1 s</text>
+<text x="44.0" y="362.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="bold" fill="#5b6d70" text-anchor="start">NS</text>
+<circle cx="96.0" cy="358.0" r="9" fill="#d64533" stroke="#1b2a2d" stroke-width="1.4"/>
+<circle cx="126.0" cy="358.0" r="9" fill="#e6ebea" stroke="#b9c4c2" stroke-width="1.4"/>
+<circle cx="156.0" cy="358.0" r="9" fill="#e6ebea" stroke="#b9c4c2" stroke-width="1.4"/>
+<text x="44.0" y="388.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="bold" fill="#5b6d70" text-anchor="start">EW</text>
+<circle cx="96.0" cy="384.0" r="9" fill="#d64533" stroke="#1b2a2d" stroke-width="1.4"/>
+<circle cx="126.0" cy="384.0" r="9" fill="#e6ebea" stroke="#b9c4c2" stroke-width="1.4"/>
+<circle cx="156.0" cy="384.0" r="9" fill="#e6ebea" stroke="#b9c4c2" stroke-width="1.4"/>
+<polyline points="280.0,118.0 325.0,118.0" fill="none" stroke="#1b2a2d" stroke-width="1.6" stroke-linejoin="round"/>
+<polygon points="325.0,118.0 317.0,121.6 317.0,114.4" fill="#1b2a2d"/>
+<polyline points="575.0,118.0 620.0,118.0" fill="none" stroke="#1b2a2d" stroke-width="1.6" stroke-linejoin="round"/>
+<polygon points="620.0,118.0 612.0,121.6 612.0,114.4" fill="#1b2a2d"/>
+<polyline points="745.0,176.0 745.0,290.0" fill="none" stroke="#1b2a2d" stroke-width="1.6" stroke-linejoin="round"/>
+<polygon points="745.0,290.0 741.4,282.0 748.6,282.0" fill="#1b2a2d"/>
+<polyline points="620.0,348.0 575.0,348.0" fill="none" stroke="#1b2a2d" stroke-width="1.6" stroke-linejoin="round"/>
+<polygon points="575.0,348.0 583.0,344.4 583.0,351.6" fill="#1b2a2d"/>
+<polyline points="325.0,348.0 280.0,348.0" fill="none" stroke="#1b2a2d" stroke-width="1.6" stroke-linejoin="round"/>
+<polygon points="280.0,348.0 288.0,344.4 288.0,351.6" fill="#1b2a2d"/>
+<polyline points="155.0,290.0 155.0,176.0" fill="none" stroke="#1b2a2d" stroke-width="1.6" stroke-linejoin="round"/>
+<polygon points="155.0,176.0 158.6,184.0 151.4,184.0" fill="#1b2a2d"/>
+<text x="30.0" y="440.0" font-family='ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace' font-size="12" font-weight="normal" fill="#0b7a75" text-anchor="start">State 5 is the power-up state, so the board starts all red.</text>
+</svg>
