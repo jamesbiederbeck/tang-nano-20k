@@ -101,4 +101,4 @@ apio test        # prints PASS for both testbenches
 
 ## Status
 
-Both testbenches pass in simulation and `apio build` succeeds. Not loaded on the board.
+Both testbenches pass in simulation and `apio build` succeeds. Checked on the board over the UART (96 vectors, all matching).

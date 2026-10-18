@@ -86,6 +86,10 @@ LEDs (active low): `leds[4:0]` show the low bits of the first reply byte, `leds[
 
 Regenerate with `examples/fpga/build_projects.py` in the Cook-Mertz repo rather than editing the generated files.
 
+## Build flag
+
+`apio.ini` sets `yosys-extra-options = -noalu`. With yosys's default ALU mapping this design gave wrong answers on the chip (most vectors mismatched) although RTL and post-synthesis simulation pass; with `-noalu` every vector matched. The cause inside the toolchain is not isolated. The price is up to twice the LUTs. A project only gets the default ALU mapping once it has been checked on the board with it.
+
 ## Test
 
 ```
@@ -95,4 +99,4 @@ apio test        # prints PASS for both testbenches
 
 ## Status
 
-Both testbenches pass in simulation and `apio build` succeeds. Not loaded on the board.
+Both testbenches pass in simulation and `apio build` succeeds. Checked on the board over the UART (96 vectors, all matching) with the flag above.
