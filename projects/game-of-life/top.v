@@ -1,6 +1,7 @@
 // Conway's Game of Life on HDMI, Tang Nano 20K: 160x90 cells, 8x8 pixels each, 1280x720 @ 60 Hz.
 // 27 MHz crystal -> rPLL -> 371.25 MHz bit clock -> CLKDIV /5 -> 74.25 MHz pixel clock.
 // Each TMDS channel is serialized 10:1 by an OSER10 and driven out as a differential pair.
+//   buttons: S1 shows the next seed kind, S2 the previous one
 //   leds (active low): leds[0] lit when the PLL is locked, leds[5:1] are the generation count (low bits)
 `ifdef SYNTHESIZE   // uses Gowin primitives (rPLL, CLKDIV, OSER10, TLVDS_OBUF) the simulator does not have
 module top (
@@ -9,7 +10,8 @@ module top (
     output wire       tmds_clk_n,
     output wire [2:0] tmds_d_p,
     output wire [2:0] tmds_d_n,
-    output wire [5:0] leds
+    output wire [5:0] leds,
+    input  wire [1:0] btn               // S1 (next seed) and S2 (previous seed)
 );
     // ---- clocks ----
     wire fclk, lock, pclk;
@@ -53,8 +55,12 @@ module top (
     wire [159:0] row;
     wire         row_valid;
     wire [15:0]  gen;
+    wire next_seed, prev_seed;
+    button_pulse bn (.clk(pclk), .raw(btn[0]), .pulse(next_seed));
+    button_pulse bp (.clk(pclk), .raw(btn[1]), .pulse(prev_seed));
+
     life_row_core #(.W(160), .H(90), .YB(7)) life (
-        .clk(pclk), .go(go), .disp_req(req), .disp_row(ny[9:3]),
+        .clk(pclk), .go(go), .next_seed(next_seed), .prev_seed(prev_seed), .disp_req(req), .disp_row(ny[9:3]),
         .disp_data(row), .disp_valid(row_valid),
         .gen(gen), .swapped(), .seed_swap(), .last_cycles());
 

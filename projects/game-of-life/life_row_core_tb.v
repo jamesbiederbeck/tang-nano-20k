@@ -14,7 +14,7 @@ module life_row_core_tb;
     wire disp_valid, swapped, seed_swap;
     wire [15:0] gen, last_cycles;
     life_row_core #(.W(W), .H(H), .YB(YB), .MAX_GEN(MAX_GEN)) dut (
-        .clk(clk), .go(go), .disp_req(disp_req), .disp_row(disp_row),
+        .clk(clk), .go(go), .next_seed(1'b0), .prev_seed(1'b0), .disp_req(disp_req), .disp_row(disp_row),
         .disp_data(disp_data), .disp_valid(disp_valid),
         .gen(gen), .swapped(swapped), .seed_swap(seed_swap), .last_cycles(last_cycles));
 

@@ -111,6 +111,7 @@ print(out.decode(errors='replace'))"
 | UART `tx` | 69 | Greeting read on the serial port. |
 | UART `rx` | 70 | `projects/cmtz/cmtz-mul` answered all 294 test pairs, with `PULL_MODE=UP`. |
 | HDMI TMDS | 33 to 40 | `projects/hdmi-test` shows a stable 720p picture. Clock on 33/34, data on 35/36, 37/38, 39/40. Use `IO_TYPE=LVDS25` without `BANK_VCCIO`. |
+| Buttons S1, S2 | 88, 87 | `projects/game-of-life`: S1 shows the next seed, S2 the previous. `LVCMOS33`, `PULL_MODE=DOWN`; the design finds the active level itself. |
 
 Pin map for the rest of the board is on the Sipeed wiki. A pin diagram image from the Amazon listing was used for the LED pins.
 
