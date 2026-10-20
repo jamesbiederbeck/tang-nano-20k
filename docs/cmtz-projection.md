@@ -27,11 +27,11 @@ All programs are hand-written assembly; none needed a new instruction. Gate coef
 |---|---|
 | `gate_direct` | y += ĝ(a, b), straight-line (baseline) |
 | `gate_projection` | y −= Σ_j ĝ(a + ω^j τ1, b + ω^j τ2); the masks are read-only and the shifted arguments are built in temporaries |
-| `gate_clean` | The same sum computed in place: the masks are added into, rotated and restored |
+| `gate_clean` | The same sum computed in place: the masks are added into, rotated and restored. The product term goes through a third restored register `s`, so no temporary is left dirty. |
 | `gate_sweep` | `gate_clean` for all 289 mask pairs in one run, with the results stored to data memory |
 | `gate_irq` | `gate_clean` repeated, with an interrupt handler that borrows mask τ1 mid-computation |
 | `tree_direct` | y += f̂(ĝ1(a, b), ĝ2(c, d)), straight-line |
-| `tree_clean` | Two levels of projection. The parent's registers τl and τr receive g1 and g2 by a full child loop, which a second child loop of the opposite sign removes. Both children share τ1 and τ2. g1 and g2 never exist anywhere except added into a register that is later restored. |
+| `tree_clean` | Two levels of projection. The parent's registers τl and τr receive g1 and g2 by a full child loop, which a second child loop of the opposite sign removes. Both children share τ1 and τ2. g1 and g2 never exist anywhere except added into a register that is later restored. Every field register except y comes back. |
 
 ## Results, by kind of evidence
 
@@ -42,9 +42,9 @@ All programs are hand-written assembly; none needed a new instruction. Gate coef
   - Every field register is a polynomial over F_17 in the entry values of all 31 registers, reduced with x^17 = x, so equality means equality as functions on F_17.
   - Index registers and control flow stay concrete.
 - `projection.prove()` uses it to establish, for every coefficient, input, mask and accumulator value in F_17:
-  - `gate_clean` and `tree_clean` (14,755 instructions) add exactly ĝ, respectively f̂(ĝ1, ĝ2), to y;
-  - every catalytic register comes back as its own value;
-  - nothing else changes except one declared temporary and the loop counters.
+  - `gate_clean` and `tree_clean` (19,955 instructions) add exactly ĝ, respectively f̂(ĝ1, ĝ2), to y;
+  - every catalytic register, including the scratch register `s`, comes back as its own value;
+  - no other field register changes. Only the loop counters in the index registers are overwritten; they are control state, not data.
 - The proven tree gain, evaluated at all 4,096 gate triples × 16 Boolean inputs, is the tree's truth value.
 - The proof rejects these mutations:
   - removing the uncompute;
@@ -52,9 +52,10 @@ All programs are hand-written assembly; none needed a new instruction. Gate coef
   - the wrong sign;
   - reading a register the host did not write;
   - a data-dependent branch.
-- Two outcomes surprised me; both are correct:
+- Three mutations are accepted, correctly:
   - **Rotating τ2 by ω^5 instead of ω still verifies.** A monomial τ1^i τ2^l then picks up ω^{j(i+5l)}, and i + 5l is never 0 mod 16 when 0 < i + l ≤ 2.
-  - **Removing the uncompute still restores the masks.** Σω^k = 0 brings them back. The gain is wrong instead: ĝ at a/(1 − ω) = 8a. The oracle predicts exactly this.
+  - **Dropping the re-negation of `s`.** `s` then alternates between σ and −σ, and Σ_j (−1)^j·(b + ω^j τ2) = 0.
+  - **Removing the uncompute** is not accepted, but the masks still come back (Σω^k = 0). The gain is wrong instead: ĝ at a/(1 − ω) = 8a, as the oracle predicts.
 
 **Independent oracle** (`cmtz/projection_oracle.py`, plain integers, imports nothing from cmtz)
 
@@ -73,12 +74,13 @@ All programs are hand-written assembly; none needed a new instruction. Gate coef
 **RTL** (iverilog, `test_isa_core.py::TestProjectionSimulation`)
 
 - 27 cases cover every program, with interrupts at chosen boundaries.
-- Each case checks the whole register file and data memory against the simulator, plus the clock cycle count against the simulator's FSM model (2 per instruction, plus 1 per LD and 1 per dispatch).
+- Each case checks the whole register file and data memory against the simulator, plus the clock cycle count against the simulator's FSM model (2 per instruction, plus 1 per load and 1 per taken trigger).
+- `TestCycleModel` checks the paths the projection programs do not take: loads (a compiled matpow), a trigger with no handler, and faults. Writing it found two places where the model was off by a cycle; both are fixed.
 - A mutated cycle count fails the test.
 
 **Board** (Tang Nano 20K, SRAM load, `-noalu`, `examples/fpga/core_run.py`, full run)
 
-- 2,459 of 2,459 checks matched.
+- 2,459 of 2,459 checks matched. Four of them are counterexample confirmations: they check that values outside F_p break restoration exactly as the RTL predicts (see below), not that something works.
 - The projection checks cover these runs:
 
   | Runs | Programs | Inputs |
@@ -88,7 +90,7 @@ All programs are hand-written assembly; none needed a new instruction. Gate coef
   | 16 each | `tree_direct`, `tree_clean` | random trees |
 
 - Each run compares the whole state against the simulator seeded with the board's state, plus the outputs against the oracle.
-- In `gate_irq`, a handler borrows a mask. T was sent over the UART and landed between about 81k and 892k instructions into a 2.36M-instruction run. y and both masks were unchanged.
+- In `gate_irq`, a handler borrows a mask. T was sent over the UART and landed between about 81k and 892k instructions into a 3.19M-instruction run. y and both masks were unchanged.
 - The non-restoring handler changed them.
 - `projection_bench.py --board`: the chip's retired counts equal the model's for all five programs.
 
@@ -100,13 +102,13 @@ Instructions and cycles are the same for every input. No branch depends on a fie
 |---|---|---|---|---|---|---|---|---|---|---|
 | gate_direct | 7 | 7 | 14 | 0.52 | 6 | 0 | 1 | 1 | 0 | 8 |
 | gate_projection | 17 | 212 | 424 | 15.7 | 8 | 0 | 1 | 4 | 2 | 13 |
-| gate_clean | 17 | 227 | 454 | 16.81 | 6 | 2 | 1 | 1 | 2 | 10 |
+| gate_clean | 22 | 307 | 614 | 22.74 | 6 | 3 | 1 | 0 | 2 | 10 |
 | tree_direct | 17 | 17 | 34 | 1.26 | 16 | 0 | 1 | 3 | 0 | 20 |
-| tree_clean | 53 | 14,755 | 29,510 | 1,092.96 | 16 | 4 | 1 | 1 | 3 | 22 |
+| tree_clean | 68 | 19,955 | 39,910 | 1,478.15 | 16 | 5 | 1 | 0 | 3 | 22 |
 
-Projection costs about 30× direct for one gate. The depth-2 tree costs about 870× direct. Each level multiplies the cost by about 65 = 16 rotations × 4 child runs (each child is added and removed again): 14,755 ≈ 16 × (4 × 227 + 14).
+Projection costs about 30× direct for one gate, and clean evaluation about 44×. Keeping the product term in a restored register instead of a temporary costs 5 more instructions per iteration. The depth-2 tree costs about 1,170× direct. Each level multiplies the cost by about 65 = 16 rotations × 4 child runs (each child is added and then removed): 19,955 = 16 × (4 × 307 + 19) + 3.
 
-**No space advantage is claimed.** At this size, the clean versions use *more* registers than direct evaluation: the tree needs 4 catalytic registers against 3 temporaries. Restoring registers is a correctness property. Cook-Mertz's space bound comes from reusing the same catalytic registers across levels of a deep tree, while the free space grows only by a loop counter per level. A depth-2 tree is too small to show that. What this work does show is the mechanism, exact on hardware: intermediate values that only ever exist inside restored registers, and one pair of masks reused by both children.
+**No space advantage is claimed.** At this size, the clean versions use *more* registers than direct evaluation: the tree needs 5 catalytic registers against 3 temporaries. Restoring registers is a correctness property. Cook-Mertz's space bound comes from reusing the same catalytic registers across levels of a deep tree, while the free space grows only by a loop counter per level. A depth-2 tree is too small to show that. What this work does show is the mechanism, exact on hardware: intermediate values that only ever exist inside restored registers, and one pair of masks reused by both children.
 
 ## Soundness gaps found in the handler verifier, and fixed
 
@@ -142,6 +144,6 @@ Every compiled example still verifies. The simulator raises on out-of-range oper
 ## Next engineering blockers
 
 1. **Alphabet.** Decide whether field registers should be exactly F_p (W and LDI refuse values ≥ p, and HORNER/REDP get their own registers or a reduce-on-write). The alternative is a catalytic contract over all values below q. Either way it is an ISA and RTL change.
-2. **Depth.** Register count is the first wall, before the 8-deep return stack or the loop-counter registers. With leaves and gate coefficients in registers, depth d needs 2^d inputs plus 4·(2^d − 1) coefficients. At depth 3 that is 36 registers, more than the 31 there are, before counting catalytic registers. So depth 3 needs coefficients compiled into the code (MULI/ADD chains) or loaded from data memory, and the latter needs LD support in the proof. Cost grows about 65× per level: depth 3 would be about 16 × 4 × 14,755 ≈ 944k instructions, about 70 ms.
+2. **Depth.** Register count is the first wall, before the 8-deep return stack or the loop-counter registers. With leaves and gate coefficients in registers, depth d needs 2^d inputs plus 4·(2^d − 1) coefficients. At depth 3 that is 36 registers, more than the 31 there are, before counting catalytic registers. So depth 3 needs coefficients compiled into the code (MULI/ADD chains) or loaded from data memory, and the latter needs LD support in the proof. Cost grows about 65× per level: depth 3 would be about 16 × 4 × 19,955 ≈ 1.28M instructions, about 95 ms.
 3. **Lowering.** A compiler pass from a gate circuit (or `IRCatalyticRegion`) to these loops, using `prove()` as the acceptance check. That probably needs a DSL construct for circuits, so it is a language decision.
 4. **Handler proofs with nonlinear restoration.** Run `isa_clean`'s polynomial execution on handlers as well, then mechanise the main/handler composition.
