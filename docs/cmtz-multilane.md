@@ -17,6 +17,7 @@ holds the design, and the simulator and RTL evidence.
 | Project | Lanes | Leases | Lane module |
 |---|---|---|---|
 | `projects/cmtz/cmtz-dual` | 2 | no | `cmtz_core`, unmodified (same text as `cmtz-core`) |
+| `projects/cmtz/cmtz-lease` | 2 | yes | `cmtz_lane`: the same generator with the register file moved out |
 
 Protocol: CMTM (`cmtz/isa/mlane_host.py`). It is cmtz-core's protocol on a
 selected lane, plus these commands:
@@ -60,3 +61,39 @@ Synthesis (`-noalu`):
 |---|---|---|---|---|
 | `cmtz-core` | 2918 | 690 | 2 | 114.9 MHz |
 | `cmtz-dual` | 5030 | 1132 | 4 | 104.0 MHz |
+
+## Register leases (`cmtz-lease`)
+
+`K b o bank count` lends `count` (1..8) of lane o's registers, R(8·bank)
+upward, to lane b. Lane b reaches them as R24 upward.
+
+- **No copies.** The two lanes' registers sit in one physical array, and
+  the window is a different path to the same flip-flops.
+- **Owner stalls.** The owner keeps running, but an owner instruction that
+  names a leased register waits in EXEC.
+- **Release.** When the borrower halts, the owner continues one cycle
+  later. A borrower that ends in an error *poisons* the registers: they are
+  never handed back as if nothing happened.
+- **Refusals.** The hardware refuses a lease of a register holding 17 or 18
+  (outside F_17; the restoration proofs do not cover those). It also
+  refuses a lane that would lend and borrow at the same time (which rules
+  out deadlock), and a bank that is already taken.
+
+Board run: `mlane_run.py`, 1733 of 1733 checks.
+
+- The independent-lane checks above pass on this build too.
+- So do the testbench's lease scenes: every refusal code, a poisoned lease
+  and its recovery, and an owner write that stalls.
+- In 40 random leases, a gate (3 registers) or a gate tree (5 registers)
+  was evaluated in the other lane's live registers while that lane looped
+  and then read one of them. The owner's values came back 40 times out of
+  40, and the outputs matched the oracle.
+- The owner stalls were 0 to 39 425 cycles, each exactly as the model
+  predicted.
+
+**What it costs.** +3792 LUT4 (+75 %) and +460 DFF over `cmtz-dual`, and Fmax
+68.6 MHz instead of 104.0. On a single core the register file maps to
+distributed RAM. Shared between lanes, behind a window mux with three read
+ports per lane, it becomes flip-flops and wide multiplexers. The register
+bits are the same, 2 × 32 × 5, so leasing in hardware saves no storage at
+this size and costs logic.
