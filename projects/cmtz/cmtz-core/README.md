@@ -72,4 +72,4 @@ apio test        # prints PASS for both testbenches
 
 ## Status
 
-Both testbenches pass in simulation and `apio build` succeeds. Checked on the board with `examples/fpga/core_run.py` (987 of 987 checks).
+Both testbenches pass in simulation and `apio build` succeeds. Checked on the board with `examples/fpga/core_run.py` (2459 of 2459 checks, including the roots-of-unity projection programs; see `docs/cmtz-projection.md` of this repo).
