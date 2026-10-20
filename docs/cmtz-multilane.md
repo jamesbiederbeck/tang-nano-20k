@@ -97,3 +97,49 @@ distributed RAM. Shared between lanes, behind a window mux with three read
 ports per lane, it becomes flip-flops and wide multiplexers. The register
 bits are the same, 2 × 32 × 5, so leasing in hardware saves no storage at
 this size and costs logic.
+
+## Four lanes (`cmtz-quad`)
+
+Four unmodified lanes take 9048 LUT4, 1627 DFF and 8 BSRAM, at 110.9 MHz.
+That is about 2060 LUT4 per lane beyond the first. Board: 468 of 468
+checks (`--quick`), then 252 of 252 for a 12-job throughput batch.
+
+In that batch, each group of four jobs was started together and awaited
+before the next, and each group waited for its longest job (a
+`tree_clean`). It ran only 1.06× faster than one lane. The multilane model,
+whose timing the board matched cycle for cycle wherever both ran, gives
+1.52 IPC (3.0×) for a 40-job queue where a lane takes the next job as soon
+as it is free. The board needs a host that keeps the lanes fed before it
+shows that.
+
+Four lanes *with* leases do not fit: place and route stops with "Unable to
+find legal placement for all cells, design is probably at utilisation
+limit". That project is not kept.
+
+## Does borrowing save storage?
+
+The question was measured in the model, which the RTL and the board match
+cycle for cycle. The setup:
+
+- One lane keeps five live values in registers it does not touch for a
+  long time.
+- The other lane runs a stream of gates or gate trees, at the smallest
+  register budget it can manage.
+
+Results:
+
+- **Borrowing gets the stream lane below the direct form.** A gate needs 7
+  registers instead of 8, and a gate tree 17 instead of 20. All borrowed
+  registers come back.
+- **Spilling gets to the same register count, much faster.** Spilling the
+  same temporaries to the lane's own data memory reaches the same budget
+  in 19 cycles per gate instead of 614, and in 53 per tree instead of
+  39 910.
+- **The lease logic costs far more than it saves.** In hardware it is
+  3792 LUT4 and 460 DFF on two lanes. The saving is 5 to 15 bits of
+  registers.
+- **The scheduler never chose to borrow.** Offered every form, its
+  least-cost policy picked spilling every time.
+
+So nothing here shows a memory improvement from borrowing, and none is
+claimed. Details and the full tables: RFC-003, section A5.
