@@ -44,7 +44,7 @@ module top (
     // The engine runs in the vertical blanking interval (line 720), when the display is not
     // reading, and takes 96 clocks. During each line's horizontal blanking the display reads
     // the row for the next active line into a shift register that steps one cell per 8 pixels.
-    localparam FRAMES_PER_GEN = 4;
+    localparam FRAMES_PER_GEN = 2;
     reg [2:0] fcnt = 0;
     always @(posedge pclk) if (frame_start) fcnt <= (fcnt == FRAMES_PER_GEN - 1) ? 3'd0 : fcnt + 3'd1;
     wire go = (x == 11'd0) && (y == 10'd720) && (fcnt == FRAMES_PER_GEN - 1);
