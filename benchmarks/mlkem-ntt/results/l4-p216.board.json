@@ -1,0 +1,17 @@
+{
+ "label": "l4-p216",
+ "lanes": 4,
+ "reduction": "montgomery",
+ "mismatches": 48,
+ "comparisons": 48,
+ "polynomials": 16,
+ "forward_cycles": [],
+ "inverse_cycles": [],
+ "core_clock_khz": 216000,
+ "back_to_back_reps": 200,
+ "back_to_back_clocks": 50000,
+ "uart_write_s": 0.0474,
+ "uart_read_s": 0.0479,
+ "run_command_wall_s": 0.0061,
+ "when": "2026-10-22 20:08:40"
+}

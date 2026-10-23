@@ -1,0 +1,24 @@
+{
+ "label": "l4-p162-sdp",
+ "lanes": 4,
+ "reduction": "montgomery",
+ "mismatches": 0,
+ "comparisons": 108,
+ "polynomials": 36,
+ "forward_cycles": [
+  250
+ ],
+ "inverse_cycles": [
+  250
+ ],
+ "core_clock_khz": 162000,
+ "back_to_back_reps": 200,
+ "back_to_back_clocks": 50000,
+ "uart_write_s": 0.0476,
+ "uart_read_s": 0.048,
+ "run_command_wall_s": 0.006,
+ "when": "2026-10-22 20:52:46",
+ "forward_us": 1.543,
+ "inverse_us": 1.543,
+ "throughput_forward_per_s": 648000
+}

@@ -1,0 +1,24 @@
+{
+ "label": "l1-p162",
+ "lanes": 1,
+ "reduction": "montgomery",
+ "mismatches": 0,
+ "comparisons": 48,
+ "polynomials": 16,
+ "forward_cycles": [
+  916
+ ],
+ "inverse_cycles": [
+  916
+ ],
+ "core_clock_khz": 162000,
+ "back_to_back_reps": 200,
+ "back_to_back_clocks": 183200,
+ "uart_write_s": 0.0475,
+ "uart_read_s": 0.048,
+ "run_command_wall_s": 0.006,
+ "when": "2026-10-22 18:50:38",
+ "forward_us": 5.654,
+ "inverse_us": 5.654,
+ "throughput_forward_per_s": 176856
+}
