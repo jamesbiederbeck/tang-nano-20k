@@ -123,6 +123,68 @@ Pin map for the rest of the board is on the Sipeed wiki. A pin diagram image fro
 - **`openFPGALoader` needs the udev rule.** Without it, it fails with "Access denied (insufficient permissions)".
 - **Hand-written Verilog off-by-one.** The first `hello.v` declared its message 28 bytes wide for a 27-byte string, which would have sent a stray `0x00` first. Fixed before the first load.
 
+## Toolchain quirks
+
+Measured on this machine with Yosys 0.63+173 and the `nextpnr-himbaechel` in
+`~/.apio/packages/oss-cad-suite`, while working out why the 4-lane ML-KEM NTT in
+`benchmarks/mlkem-ntt/` gave wrong answers on the board at 162 MHz and above. Re-check them
+after a package update; they are toolchain behaviour, not board behaviour.
+
+Two separate causes were at work in that design, and neither one showed up in the timing
+report: high fan-out control nets, and untimed block-RAM paths. Fixing the fan-out is what
+got the 4-lane core correct at 162 MHz.
+
+- **A high fan-out net is not flagged, and nothing replicates its driver for you.** In the
+  4-lane NTT one flip-flop, `core.wv`, drove 251 loads and `wv1` drove 136, and the
+  place-and-route report named no path through either. Hand-replicating the driver, as
+  per-bank `(* keep *)` copies, and dropping some redundant gating took the real 4-lane
+  design from wrong at 162 MHz to 0 mismatches in 250 cycles on the board. A variant with
+  the banks in LUT RAM and the ROM in LUTs, so no block RAM at all, was *worse* at
+  162 MHz (50 of 256 coefficients wrong) and had a ROM address net with fan-out over 1000,
+  which is what pointed at fan-out rather than at the memories. Count loads per net in the
+  `_build` JSON when a design misbehaves above about 150 MHz; the report will not tell you.
+- **`nextpnr-himbaechel` does not time BSRAM paths, so its fmax is meaningless for any
+  design whose real critical path touches a block RAM.** A probe of an LFSR plus one
+  1024x18 BSRAM read into a fabric flip-flop, and nothing else, reports
+  `Max frequency 1098.90 MHz (PASS at 400.00 MHz)`. Its worst path *ends* at the BSRAM
+  address pin (`Sink mem.0.0.ADA7`, `setup 0.03`, 0.91 ns total) and no path *starting* at
+  the BSRAM output appears at all. An equivalent flip-flop to LUT to flip-flop design with
+  no BSRAM reports 1154.73 MHz, so the BSRAM design is reported no slower than plain logic.
+  In the NTT builds this shows up as a reported critical path that is always in the UART
+  shim (`rst_cnt` to `lock` to `core.done` to `sendbuf` CE, 4.67 ns at 4 lanes) and never in
+  the banks, the control ROM or the multipliers. It misses in both directions: a build
+  reported as `192.05 MHz FAIL at 199.80` ran clean on the board, and one reported as
+  `213.95 MHz PASS at 162.00` was wrong in 37 of 48 comparisons.
+  Consequences worth remembering: a `PASS` does not mean the design closes; adding fabric
+  pipeline stages after a BSRAM does not help, because the unmodelled part is the BSRAM's
+  own access time plus the route to that register, and place-and-route sees that route as
+  free, so it will not shorten it; and the real ceiling drops as you add block RAMs.
+  Check such a design on the board at the clock you intend to use. In the NTT this was the
+  smaller of the two causes at 162 MHz but is the suspected remaining gap above 180 MHz,
+  where the 4-lane core still fails.
+- **Yosys always puts inferred BSRAM in bypass read mode.** `share/yosys/gowin/brams_map.v`
+  hardcodes `.READ_MODE(1'b0)` on every BSRAM it emits, and `brams.txt` has no
+  output-register option at all, so a register written next to the memory read in the RTL
+  stays a fabric flip-flop and is never absorbed into the BSRAM. Bypass is the slowest read
+  arc and, per the point above, the untimed one. Instantiate `SDPB`/`SDPX9B`/`DPB` yourself
+  with `READ_MODE=1` if you want the internal output register.
+- **A 1R1W memory infers as `DP`, not `SDP`.** In `share/yosys/gowin/brams.txt`
+  `$__GOWIN_DP_` and `$__GOWIN_SDP_` both cost 128 and both offer the 18-bit width, and
+  `DP` is listed first, so the tie goes to `DP`. There is no attribute for this; instantiate
+  the primitive if you need semi-dual-port. Note also that `DP` offers only
+  `WRITE_MODE` 0 (no change) and 1 (new): unlike `SP` it has no read-first mode, so Verilog
+  that reads the old value at a written address is not guaranteed in silicon.
+- **To keep a ROM out of BSRAM, `ram_style`, `rom_style` and `logic_block` all work;
+  `"distributed"` does not.** On the 492 x 188-bit control ROM in
+  `benchmarks/mlkem-ntt/work/mlkem-ntt-l4-p162/mlkem_ntt_core.v`,
+  `(* ram_style = "logic" *)` on the `reg` declaration took it from 6 `SPX9` to none, at
+  +1869 `LUT4` and +1464 `MUX2_LUT5`. `(* rom_style = "logic" *)` and `(* logic_block *)`
+  give byte-identical results. `(* ram_style = "distributed" *)` fails with
+  `ERROR: no valid mapping found for memory`, because `lutrams.txt` sets `prune_rom` and so
+  LUT RAM is never offered to a read-only memory. Verify the result by counting `SP`/`SPX9`
+  cells in the `_build` JSON, not by reading the `BSRAM` line in `apio report`, which counts
+  every block RAM in the design.
+
 ## What has not been tried
 
 - `apio upload`. All programming so far used `openFPGALoader` directly.

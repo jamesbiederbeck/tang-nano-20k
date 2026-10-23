@@ -52,6 +52,8 @@ The high-level steps are in `developing.md`, under "Starting a new project".
 | [`stoplight`](projects/stoplight/) | Two-way intersection state machine on the LEDs, with a testbench. |
 | [`hdmi-test`](projects/hdmi-test/) | 1280x720 @ 60 Hz HDMI test pattern with its own TMDS encoder. |
 | [`cmtz/`](projects/cmtz/) | Cook-Mertz programs compiled to Verilog, each a UART pipeline. Generated from the cook_mertz repo. |
+| [`cmtz-core-step`](projects/cmtz-core-step/) | The reusable cmtz-core processor with a debugger: pause and single-step it over the UART and read the registers back. Generated from the cook_mertz repo; `cmtz/cmtz-core` is unchanged. |
+| [`uart-adder`](projects/uart-adder/) | A 2-bit adder you step from a browser (Web Serial page), plus a `k` command that shows a number on the LEDs. |
 
 ## Layout
 
@@ -59,7 +61,7 @@ The high-level steps are in `developing.md`, under "Starting a new project".
 |---|---|
 | `projects/<name>/` | One APIO project each: `apio.ini`, Verilog, `pins.cst` |
 | `docs/` | Notes on the Hackaday series and where it informed this repo. `docs/diagrams/` holds the SVG diagrams the READMEs show. |
-| `scripts/` | `draw_diagrams.py` draws the hand-made overview SVGs. `generate-diagrams.sh` makes a Yosys schematic of one small module. |
+| `scripts/` | `draw_diagrams.py` draws the hand-made overview SVGs. `generate-diagrams.sh` makes a Yosys schematic of one small module. `floorplan.py` writes where nextpnr placed a built project on the GW2A-18C, as JSON for the cook_mertz visualizer's Chip dialog (run it with the toolchain's `tabbypy3`, see its docstring). |
 | `reference/` | Dumps and notes from the board itself |
 | `udev/` | udev rule that gives the `plugdev` group access to the on-board debugger |
 | `developing.md` | What is installed, where, what was changed on this machine, workflow, pitfalls |
